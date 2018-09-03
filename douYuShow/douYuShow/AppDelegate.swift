@@ -45,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func setupRootViewController() -> UIViewController {
-        return PJHomeViewController()
+        return PJMainTabBarController()
     }
 
 }

@@ -8,21 +8,21 @@
 
 import UIKit
 
-class PJHomeViewController: UITableViewController {
+class PJHomeViewController: PJBaseTableViewController {
 
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setNavBar()
+        
+//        setupUI()
+    }
+    
+    private func setupUI(){
+//        navigationController?.view.insertSubview(<#T##view: UIView##UIView#>, belowSubview: (navigationController?.navigationBar)!)
     }
 
-    extension PJHomeViewController{
-    func setNavBar() ->  {
-//        navigationItem.rightBarButtonItem = UIBarButtonItem(image: "navigation_pop", style: self, target: <#T##Any?#>, action: <#T##Selector?#>)
-    }
-    }
+   
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -43,4 +43,15 @@ class PJHomeViewController: UITableViewController {
 
     
 
+}
+
+extension PJHomeViewController{
+    fileprivate func setNavBar(){
+        navigationItem.rightBarButtonItem = UIBarButtonItem(imageName: "navigationbar_pop", target: self, action: #selector(btnClick))
+    }
+    func btnClick(){
+//        let demo = PJHomeViewController()
+//        navigationController?.pushViewController(demo, animated: true)
+          print("11")
+    }
 }

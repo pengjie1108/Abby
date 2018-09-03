@@ -12,6 +12,9 @@
 		44E54F5B213930200008E042 /* PJHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E54F5A213930200008E042 /* PJHomeViewController.swift */; };
 		44E54F6021393ADD0008E042 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E54F5F21393ADD0008E042 /* UIView+Extension.swift */; };
 		44E54F62213944530008E042 /* UIBarButtonItem+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E54F61213944530008E042 /* UIBarButtonItem+Extension.swift */; };
+		44E54F66213CE2670008E042 /* PJMainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E54F65213CE2670008E042 /* PJMainTabBarController.swift */; };
+		44E54F68213CE63C0008E042 /* PJBaseNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E54F67213CE63C0008E042 /* PJBaseNavController.swift */; };
+		44E54F6A213D03470008E042 /* PJBaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E54F69213D03470008E042 /* PJBaseTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +25,9 @@
 		44E54F5A213930200008E042 /* PJHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PJHomeViewController.swift; sourceTree = "<group>"; };
 		44E54F5F21393ADD0008E042 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		44E54F61213944530008E042 /* UIBarButtonItem+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Extension.swift"; sourceTree = "<group>"; };
+		44E54F65213CE2670008E042 /* PJMainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PJMainTabBarController.swift; sourceTree = "<group>"; };
+		44E54F67213CE63C0008E042 /* PJBaseNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PJBaseNavController.swift; sourceTree = "<group>"; };
+		44E54F69213D03470008E042 /* PJBaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PJBaseTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +170,9 @@
 		44E54F5721392F680008E042 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				44E54F65213CE2670008E042 /* PJMainTabBarController.swift */,
+				44E54F67213CE63C0008E042 /* PJBaseNavController.swift */,
+				44E54F69213D03470008E042 /* PJBaseTableViewController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -263,9 +272,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				44E54F62213944530008E042 /* UIBarButtonItem+Extension.swift in Sources */,
+				44E54F6A213D03470008E042 /* PJBaseTableViewController.swift in Sources */,
 				44E54F6021393ADD0008E042 /* UIView+Extension.swift in Sources */,
+				44E54F68213CE63C0008E042 /* PJBaseNavController.swift in Sources */,
 				39616FE01DE161AC00C841B7 /* AppDelegate.swift in Sources */,
 				44E54F5B213930200008E042 /* PJHomeViewController.swift in Sources */,
+				44E54F66213CE2670008E042 /* PJMainTabBarController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

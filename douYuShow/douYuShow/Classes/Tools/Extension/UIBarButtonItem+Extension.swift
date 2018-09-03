@@ -11,7 +11,7 @@ import UIKit
 extension UIBarButtonItem{
     //给 UIBarButtonItem 扩充快速创建对象的方法
     //给函数的参数设置默认值,系统会是自动生成多个函数
-    convenience init(title: String? = nil,backImage: String? = nil,imageName: String? = nil,target:Any?, action:Selector?){
+    convenience init(title: String? = nil, backImage: String? = nil, imageName: String? = nil, target:Any?, action:Selector?){
         let btn = UIButton()
         btn.setTitleColor(UIColor.darkGray, for: .normal)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
