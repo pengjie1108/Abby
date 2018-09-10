@@ -50,8 +50,8 @@ extension PJHomeViewController{
         navigationItem.rightBarButtonItem = UIBarButtonItem(imageName: "navigationbar_pop", target: self, action: #selector(btnClick))
     }
     func btnClick(){
-//        let demo = PJHomeViewController()
-//        navigationController?.pushViewController(demo, animated: true)
-          print("11")
+        let demo = UIViewController()
+        navigationController?.pushViewController(demo, animated: true)
+        print("11")
     }
 }

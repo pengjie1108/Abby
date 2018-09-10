@@ -34,14 +34,14 @@ class PJMainTabBarController: UITabBarController {
         vc.navigationItem.title = title
         vc.title = title
         vc.tabBarItem.image = UIImage(named: imageName)
-//        //设置选中图片,和选中文字颜色
+        //设置选中图片,和选中文字颜色
         vc.tabBarItem.selectedImage = UIImage(named: imageName + "_selected")?.withRenderingMode(.alwaysOriginal)
         vc.tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName : UIColor.orange], for: .selected)
         vc.tabBarItem.badgeValue = "10"
         vc.tabBarItem.badgeColor = UIColor.purple
-//        //包装到导航视图控制器
+        //包装到导航视图控制器
         let nav = PJBaseNavController(rootViewController: vc)
-//        //添加到 tabbarController
+        //添加到 tabbarController
         addChildViewController(nav)
     }
     

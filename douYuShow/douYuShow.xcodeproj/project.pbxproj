@@ -9,12 +9,17 @@
 /* Begin PBXBuildFile section */
 		39616FE01DE161AC00C841B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39616FDF1DE161AC00C841B7 /* AppDelegate.swift */; };
 		39616FE71DE161AC00C841B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39616FE61DE161AC00C841B7 /* Assets.xcassets */; };
+		4431B79F2146485800ADC291 /* PJDiscoverTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4431B79E2146485800ADC291 /* PJDiscoverTableViewController.swift */; };
+		4431B7A12146489D00ADC291 /* PJMessageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4431B7A02146489D00ADC291 /* PJMessageTableViewController.swift */; };
+		4431B7A3214648B500ADC291 /* PJProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4431B7A2214648B500ADC291 /* PJProfileTableViewController.swift */; };
 		44E54F5B213930200008E042 /* PJHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E54F5A213930200008E042 /* PJHomeViewController.swift */; };
 		44E54F6021393ADD0008E042 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E54F5F21393ADD0008E042 /* UIView+Extension.swift */; };
 		44E54F62213944530008E042 /* UIBarButtonItem+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E54F61213944530008E042 /* UIBarButtonItem+Extension.swift */; };
 		44E54F66213CE2670008E042 /* PJMainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E54F65213CE2670008E042 /* PJMainTabBarController.swift */; };
 		44E54F68213CE63C0008E042 /* PJBaseNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E54F67213CE63C0008E042 /* PJBaseNavController.swift */; };
 		44E54F6A213D03470008E042 /* PJBaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E54F69213D03470008E042 /* PJBaseTableViewController.swift */; };
+		44E54F6C213D0EB60008E042 /* PJUserAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E54F6B213D0EB60008E042 /* PJUserAccountViewModel.swift */; };
+		44E54F6E213D15130008E042 /* PJUserAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E54F6D213D15130008E042 /* PJUserAccount.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,12 +27,17 @@
 		39616FDF1DE161AC00C841B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		39616FE61DE161AC00C841B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		39616FEB1DE161AC00C841B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4431B79E2146485800ADC291 /* PJDiscoverTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PJDiscoverTableViewController.swift; sourceTree = "<group>"; };
+		4431B7A02146489D00ADC291 /* PJMessageTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PJMessageTableViewController.swift; sourceTree = "<group>"; };
+		4431B7A2214648B500ADC291 /* PJProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PJProfileTableViewController.swift; sourceTree = "<group>"; };
 		44E54F5A213930200008E042 /* PJHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PJHomeViewController.swift; sourceTree = "<group>"; };
 		44E54F5F21393ADD0008E042 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		44E54F61213944530008E042 /* UIBarButtonItem+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Extension.swift"; sourceTree = "<group>"; };
 		44E54F65213CE2670008E042 /* PJMainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PJMainTabBarController.swift; sourceTree = "<group>"; };
 		44E54F67213CE63C0008E042 /* PJBaseNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PJBaseNavController.swift; sourceTree = "<group>"; };
 		44E54F69213D03470008E042 /* PJBaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PJBaseTableViewController.swift; sourceTree = "<group>"; };
+		44E54F6B213D0EB60008E042 /* PJUserAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PJUserAccountViewModel.swift; sourceTree = "<group>"; };
+		44E54F6D213D15130008E042 /* PJUserAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PJUserAccount.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +93,7 @@
 		44E54F4C21392F680008E042 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				44E54F6B213D0EB60008E042 /* PJUserAccountViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -105,6 +116,7 @@
 		44E54F4F21392F680008E042 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				44E54F6D213D15130008E042 /* PJUserAccount.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -135,6 +147,7 @@
 		44E54F5221392F680008E042 /* Discover */ = {
 			isa = PBXGroup;
 			children = (
+				4431B79E2146485800ADC291 /* PJDiscoverTableViewController.swift */,
 			);
 			path = Discover;
 			sourceTree = "<group>";
@@ -156,6 +169,7 @@
 		44E54F5521392F680008E042 /* Message */ = {
 			isa = PBXGroup;
 			children = (
+				4431B7A02146489D00ADC291 /* PJMessageTableViewController.swift */,
 			);
 			path = Message;
 			sourceTree = "<group>";
@@ -163,6 +177,7 @@
 		44E54F5621392F680008E042 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				4431B7A2214648B500ADC291 /* PJProfileTableViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -227,6 +242,7 @@
 		39616FD41DE161AC00C841B7 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = PJ;
 				LastSwiftUpdateCheck = 0810;
 				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = pengjie;
@@ -271,10 +287,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44E54F6E213D15130008E042 /* PJUserAccount.swift in Sources */,
 				44E54F62213944530008E042 /* UIBarButtonItem+Extension.swift in Sources */,
+				44E54F6C213D0EB60008E042 /* PJUserAccountViewModel.swift in Sources */,
 				44E54F6A213D03470008E042 /* PJBaseTableViewController.swift in Sources */,
 				44E54F6021393ADD0008E042 /* UIView+Extension.swift in Sources */,
 				44E54F68213CE63C0008E042 /* PJBaseNavController.swift in Sources */,
+				4431B7A12146489D00ADC291 /* PJMessageTableViewController.swift in Sources */,
+				4431B7A3214648B500ADC291 /* PJProfileTableViewController.swift in Sources */,
+				4431B79F2146485800ADC291 /* PJDiscoverTableViewController.swift in Sources */,
 				39616FE01DE161AC00C841B7 /* AppDelegate.swift in Sources */,
 				44E54F5B213930200008E042 /* PJHomeViewController.swift in Sources */,
 				44E54F66213CE2670008E042 /* PJMainTabBarController.swift in Sources */,
