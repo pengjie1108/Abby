@@ -18,6 +18,10 @@ class PJMainTabBarController: UITabBarController {
         //自定义 tabbar, 只读属性
         let pjTabBar = PJTabBar()
         self.setValue(pjTabBar, forKey: "tabBar")
+        
+        pjTabBar.clickClosure = {(tabbar:PJTabBar) -> () in
+            print("点击加号按钮")
+        }
     }
 
     //批量添加子控制器
