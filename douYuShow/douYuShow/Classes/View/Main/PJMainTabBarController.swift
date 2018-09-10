@@ -19,7 +19,8 @@ class PJMainTabBarController: UITabBarController {
         let pjTabBar = PJTabBar()
         self.setValue(pjTabBar, forKey: "tabBar")
         
-        pjTabBar.clickClosure = {(tabbar:PJTabBar) -> () in
+        //监听按钮点击事件
+        pjTabBar.clickClosure = {[weak self] (tabbar:PJTabBar) -> () in
             print("点击加号按钮")
         }
     }
@@ -27,13 +28,13 @@ class PJMainTabBarController: UITabBarController {
     //批量添加子控制器
     private func addChildViewControllers() {
         //首页 VC
-        addchildViewController(vc: PJHomeViewController(), title: "首页", imageName: "tabbar_home")
+        addchildViewController(vc: PJHomeTableViewController(), title: "首页", imageName: "tabbar_home")
         //消息 VC
-        addchildViewController(vc: PJHomeViewController(), title: "消息", imageName: "tabbar_message_center")
+        addchildViewController(vc: PJMessageTableViewController(), title: "消息", imageName: "tabbar_message_center")
         //发现 VC
-        addchildViewController(vc: PJHomeViewController(), title: "发现", imageName: "tabbar_discover")
+        addchildViewController(vc: PJDiscoverTableViewController(), title: "发现", imageName: "tabbar_discover")
         //我 VC
-        addchildViewController(vc: PJHomeViewController(), title: "我", imageName: "tabbar_profile")
+        addchildViewController(vc: PJProfileTableViewController(), title: "我", imageName: "tabbar_profile")
     }
     
     private func addchildViewController(vc:UIViewController, title: String, imageName:String){

@@ -32,11 +32,12 @@ class PJBaseNavController: UINavigationController, UIGestureRecognizerDelegate{
         
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    //实现手势的协议方法
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        //根据条件 让手势能否工作
+        //判断是否根控制器
+        let count = childViewControllers.count
+        return count > 1
     }
-    
-
     
 }

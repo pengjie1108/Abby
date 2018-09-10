@@ -13,7 +13,7 @@
 		4431B7A12146489D00ADC291 /* PJMessageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4431B7A02146489D00ADC291 /* PJMessageTableViewController.swift */; };
 		4431B7A3214648B500ADC291 /* PJProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4431B7A2214648B500ADC291 /* PJProfileTableViewController.swift */; };
 		4431B7A621464BAD00ADC291 /* PJTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4431B7A521464BAD00ADC291 /* PJTabBar.swift */; };
-		44E54F5B213930200008E042 /* PJHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E54F5A213930200008E042 /* PJHomeViewController.swift */; };
+		44E54F5B213930200008E042 /* PJHomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E54F5A213930200008E042 /* PJHomeTableViewController.swift */; };
 		44E54F6021393ADD0008E042 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E54F5F21393ADD0008E042 /* UIView+Extension.swift */; };
 		44E54F62213944530008E042 /* UIBarButtonItem+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E54F61213944530008E042 /* UIBarButtonItem+Extension.swift */; };
 		44E54F66213CE2670008E042 /* PJMainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E54F65213CE2670008E042 /* PJMainTabBarController.swift */; };
@@ -32,7 +32,7 @@
 		4431B7A02146489D00ADC291 /* PJMessageTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PJMessageTableViewController.swift; sourceTree = "<group>"; };
 		4431B7A2214648B500ADC291 /* PJProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PJProfileTableViewController.swift; sourceTree = "<group>"; };
 		4431B7A521464BAD00ADC291 /* PJTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PJTabBar.swift; sourceTree = "<group>"; };
-		44E54F5A213930200008E042 /* PJHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PJHomeViewController.swift; sourceTree = "<group>"; };
+		44E54F5A213930200008E042 /* PJHomeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PJHomeTableViewController.swift; sourceTree = "<group>"; };
 		44E54F5F21393ADD0008E042 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		44E54F61213944530008E042 /* UIBarButtonItem+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Extension.swift"; sourceTree = "<group>"; };
 		44E54F65213CE2670008E042 /* PJMainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PJMainTabBarController.swift; sourceTree = "<group>"; };
@@ -213,7 +213,7 @@
 		44E54F5921392FEC0008E042 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				44E54F5A213930200008E042 /* PJHomeViewController.swift */,
+				44E54F5A213930200008E042 /* PJHomeTableViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -309,7 +309,7 @@
 				4431B79F2146485800ADC291 /* PJDiscoverTableViewController.swift in Sources */,
 				39616FE01DE161AC00C841B7 /* AppDelegate.swift in Sources */,
 				4431B7A621464BAD00ADC291 /* PJTabBar.swift in Sources */,
-				44E54F5B213930200008E042 /* PJHomeViewController.swift in Sources */,
+				44E54F5B213930200008E042 /* PJHomeTableViewController.swift in Sources */,
 				44E54F66213CE2670008E042 /* PJMainTabBarController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

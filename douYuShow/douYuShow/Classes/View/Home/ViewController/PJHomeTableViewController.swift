@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PJHomeViewController: PJBaseTableViewController {
+class PJHomeTableViewController: PJBaseTableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,6 +16,18 @@ class PJHomeViewController: PJBaseTableViewController {
         setNavBar()
         
 //        setupUI()
+    }
+    private func setNavBar(){
+        navigationItem.rightBarButtonItem = UIBarButtonItem(imageName: "navigationbar_pop", target: self, action: #selector(btnClick))
+    }
+    
+    @objc private func btnClick(){
+        let demo = UIViewController()
+        navigationController?.pushViewController(demo, animated: true)
+    }
+    
+    func back() {
+        
     }
     
     private func setupUI(){
@@ -45,13 +57,13 @@ class PJHomeViewController: PJBaseTableViewController {
 
 }
 
-extension PJHomeViewController{
-    fileprivate func setNavBar(){
-        navigationItem.rightBarButtonItem = UIBarButtonItem(imageName: "navigationbar_pop", target: self, action: #selector(btnClick))
-    }
-    func btnClick(){
-        let demo = UIViewController()
-        navigationController?.pushViewController(demo, animated: true)
-        print("11")
-    }
-}
+//extension PJHomeTableViewController{
+//    fileprivate func setNavBar(){
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(imageName: "navigationbar_pop", target: self, action: #selector(btnClick))
+//    }
+//    func btnClick(){
+//        let demo = UIViewController()
+//        navigationController?.pushViewController(demo, animated: true)
+//        print("11")
+//    }
+//}
