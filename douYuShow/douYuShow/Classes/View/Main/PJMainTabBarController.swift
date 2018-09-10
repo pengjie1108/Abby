@@ -14,6 +14,10 @@ class PJMainTabBarController: UITabBarController {
         super.viewDidLoad()
         
         addChildViewControllers()
+        
+        //自定义 tabbar, 只读属性
+        let pjTabBar = PJTabBar()
+        self.setValue(pjTabBar, forKey: "tabBar")
     }
 
     //批量添加子控制器
@@ -37,7 +41,7 @@ class PJMainTabBarController: UITabBarController {
         //设置选中图片,和选中文字颜色
         vc.tabBarItem.selectedImage = UIImage(named: imageName + "_selected")?.withRenderingMode(.alwaysOriginal)
         vc.tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName : UIColor.orange], for: .selected)
-        vc.tabBarItem.badgeValue = "10"
+//        vc.tabBarItem.badgeValue = "10"
         vc.tabBarItem.badgeColor = UIColor.purple
         //包装到导航视图控制器
         let nav = PJBaseNavController(rootViewController: vc)
