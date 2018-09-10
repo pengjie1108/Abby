@@ -8,6 +8,18 @@
 
 import UIKit
 
+extension UILabel{
+    convenience init(title: String, textColor: UIColor, fontSize: CGFloat ){
+        self.init()
+        //给label 设置基本的属性
+        self.text = title
+        self.textColor = textColor
+        self.font = UIFont.systemFont(ofSize: fontSize)
+        //自适应大小
+        self.sizeToFit()
+    }
+}
+
 extension UIButton{
     convenience init(title: String, textColor:UIColor, fontSize:CGFloat,backImageName:String,imageName: String? = nil){
         self.init()

@@ -13,6 +13,7 @@
 		4431B7A12146489D00ADC291 /* PJMessageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4431B7A02146489D00ADC291 /* PJMessageTableViewController.swift */; };
 		4431B7A3214648B500ADC291 /* PJProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4431B7A2214648B500ADC291 /* PJProfileTableViewController.swift */; };
 		4431B7A621464BAD00ADC291 /* PJTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4431B7A521464BAD00ADC291 /* PJTabBar.swift */; };
+		4431B7A82146674F00ADC291 /* PJVisitorLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4431B7A72146674F00ADC291 /* PJVisitorLoginView.swift */; };
 		44E54F5B213930200008E042 /* PJHomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E54F5A213930200008E042 /* PJHomeTableViewController.swift */; };
 		44E54F6021393ADD0008E042 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E54F5F21393ADD0008E042 /* UIView+Extension.swift */; };
 		44E54F62213944530008E042 /* UIBarButtonItem+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E54F61213944530008E042 /* UIBarButtonItem+Extension.swift */; };
@@ -32,6 +33,7 @@
 		4431B7A02146489D00ADC291 /* PJMessageTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PJMessageTableViewController.swift; sourceTree = "<group>"; };
 		4431B7A2214648B500ADC291 /* PJProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PJProfileTableViewController.swift; sourceTree = "<group>"; };
 		4431B7A521464BAD00ADC291 /* PJTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PJTabBar.swift; sourceTree = "<group>"; };
+		4431B7A72146674F00ADC291 /* PJVisitorLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PJVisitorLoginView.swift; sourceTree = "<group>"; };
 		44E54F5A213930200008E042 /* PJHomeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PJHomeTableViewController.swift; sourceTree = "<group>"; };
 		44E54F5F21393ADD0008E042 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		44E54F61213944530008E042 /* UIBarButtonItem+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Extension.swift"; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				4431B7A521464BAD00ADC291 /* PJTabBar.swift */,
+				4431B7A72146674F00ADC291 /* PJVisitorLoginView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -301,6 +304,7 @@
 				44E54F6E213D15130008E042 /* PJUserAccount.swift in Sources */,
 				44E54F62213944530008E042 /* UIBarButtonItem+Extension.swift in Sources */,
 				44E54F6C213D0EB60008E042 /* PJUserAccountViewModel.swift in Sources */,
+				4431B7A82146674F00ADC291 /* PJVisitorLoginView.swift in Sources */,
 				44E54F6A213D03470008E042 /* PJBaseTableViewController.swift in Sources */,
 				44E54F6021393ADD0008E042 /* UIView+Extension.swift in Sources */,
 				44E54F68213CE63C0008E042 /* PJBaseNavController.swift in Sources */,

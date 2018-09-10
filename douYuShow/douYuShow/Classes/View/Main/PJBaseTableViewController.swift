@@ -10,14 +10,18 @@ import UIKit
 
 class PJBaseTableViewController: UITableViewController {
 
+    var userLogin = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        if userLogin == true {
+            super.loadView()
+        }else{
+            let v = PJVisitorLoginView(frame: UIScreen.main.bounds)
+            v.backgroundColor = UIColor.white
+            self.view = v
+        }
     }
 
     override func didReceiveMemoryWarning() {
