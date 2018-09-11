@@ -8,8 +8,17 @@
 
 import UIKit
 
-class PJBaseTableViewController: UITableViewController {
-
+class PJBaseTableViewController: UITableViewController,PJVisitorLoginViewDelegate{
+    
+    
+    func userWillLogin(visitorView: PJVisitorLoginView) {
+        print(#function)
+    }
+    
+    func userWillRegsiter(visitorView: PJVisitorLoginView) {
+        print(#function)
+    }
+    
     var userLogin = false
     
     lazy var visitorView = PJVisitorLoginView(frame: UIScreen.main.bounds)
@@ -21,6 +30,8 @@ class PJBaseTableViewController: UITableViewController {
             super.loadView()
         }else{  
             self.view = visitorView
+            //设置代理对象
+            self.visitorView.delegate = self
         }
     }
 

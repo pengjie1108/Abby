@@ -9,8 +9,17 @@
 import UIKit
 import SnapKit
 
+protocol PJVisitorLoginViewDelegate:NSObjectProtocol {
+    //定义协议方法
+    func userWillLogin(visitorView: PJVisitorLoginView)
+    func userWillRegsiter(visitorView: PJVisitorLoginView)
+}
+
 class PJVisitorLoginView: UIView {
 
+    //定义代理对象
+    weak var delegate: PJVisitorLoginViewDelegate?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUpUI()
@@ -68,20 +77,35 @@ class PJVisitorLoginView: UIView {
             make.top.equalTo(circleView.snp.bottom).offset(16)
             make.centerX.equalTo(circleView)
         }
-        registerBtn.snp.makeConstraints { (make) in
-            make.top.equalTo(tipLabel.snp.bottom).offset(16)
-            make.left.equalTo(tipLabel)
-            make.width.equalTo(100)
-        }
         loginBtn.snp.makeConstraints { (make) in
             make.top.equalTo(tipLabel.snp.bottom).offset(16)
             make.right.equalTo(tipLabel)
             make.width.equalTo(100)
         }
+        registerBtn.snp.makeConstraints { (make) in
+            make.top.equalTo(tipLabel.snp.bottom).offset(16)
+            make.left.equalTo(tipLabel)
+            make.width.equalTo(100)
+        }
+        
         
         tipLabel.preferredMaxLayoutWidth = 230
         backgroundColor = UIColor(white: 237.0/255.0, alpha: 1)
         
+        loginBtn.addTarget(self, action: #selector(loginClick), for: .touchUpInside)
+        registerBtn.addTarget(self, action: #selector(registerClick), for: .touchUpInside)
+    }
+    
+    //登录
+    @objc private func loginClick(){
+        //代理对象执行协议方法
+        delegate?.userWillLogin(visitorView: self)
+    }
+    
+    //注册
+    @objc private func registerClick(){
+        //代理对象执行协议方法
+        delegate?.userWillRegsiter(visitorView: self)
     }
     
     //圈圈
