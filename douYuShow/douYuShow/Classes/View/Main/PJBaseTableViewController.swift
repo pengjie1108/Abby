@@ -13,6 +13,9 @@ class PJBaseTableViewController: UITableViewController,PJVisitorLoginViewDelegat
     
     func userWillLogin(visitorView: PJVisitorLoginView) {
         print(#function)
+        let oauth = PJOAuthViewController()
+        let nav = UINavigationController(rootViewController: oauth)
+        self.present(nav, animated: true, completion: nil)
     }
     
     func userWillRegsiter(visitorView: PJVisitorLoginView) {

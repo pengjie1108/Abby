@@ -7,5 +7,6 @@ target 'douYuShow' do
 
   # Pods for douYuShow
   pod 'SnapKit'
+  pod 'SVProgressHUD'
 
 end
