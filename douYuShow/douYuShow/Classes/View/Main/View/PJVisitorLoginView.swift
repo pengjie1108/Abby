@@ -25,6 +25,23 @@ class PJVisitorLoginView: UIView {
         self.coverView.isHidden = !isHome
         self.tipLabel.text = title
         self.circleView.image = UIImage(named: imageName)
+        
+        if isHome{
+          startAnimation()
+        }
+    }
+    
+    private func startAnimation(){
+        //给圈圈添加动画效果
+        //1.实例化基本动画对象
+        let animation = CABasicAnimation(keyPath: "transform.rotation")
+        //2.设置动画效果
+        animation.toValue = 2 * M_PI
+        animation.duration = 15
+        animation.repeatCount = MAXFLOAT
+        animation.isRemovedOnCompletion = false
+        //3.将动画对象添加到图层
+        circleView.layer.add(animation, forKey: nil)
     }
     
     private func setUpUI(){
