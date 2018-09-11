@@ -12,15 +12,15 @@ class PJBaseTableViewController: UITableViewController {
 
     var userLogin = false
     
+    lazy var visitorView = PJVisitorLoginView(frame: UIScreen.main.bounds)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         if userLogin == true {
             super.loadView()
-        }else{
-            let v = PJVisitorLoginView(frame: UIScreen.main.bounds)
-            v.backgroundColor = UIColor.white
-            self.view = v
+        }else{  
+            self.view = visitorView
         }
     }
 

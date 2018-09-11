@@ -15,7 +15,9 @@ class PJHomeTableViewController: PJBaseTableViewController {
 
         setNavBar()
         
-//        setupUI()
+        if !userLogin {
+            visitorView.updateUI(title: "关注一些人,回到这里看看有什么惊喜哟", imageName: "visitordiscover_feed_image_smallicon",isHome: true)
+        }
     }
     private func setNavBar(){
         navigationItem.rightBarButtonItem = UIBarButtonItem(imageName: "navigationbar_pop", target: self, action: #selector(btnClick))

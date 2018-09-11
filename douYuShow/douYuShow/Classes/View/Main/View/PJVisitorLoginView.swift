@@ -20,6 +20,13 @@ class PJVisitorLoginView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func updateUI(title: String, imageName: String, isHome: Bool = false){
+        self.largeHouse.isHidden = !isHome
+        self.coverView.isHidden = !isHome
+        self.tipLabel.text = title
+        self.circleView.image = UIImage(named: imageName)
+    }
+    
     private func setUpUI(){
         //先添加子视图,再添加约束
         addSubview(circleView)
