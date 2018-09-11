@@ -15,6 +15,8 @@
 		4431B7A621464BAD00ADC291 /* PJTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4431B7A521464BAD00ADC291 /* PJTabBar.swift */; };
 		4431B7A82146674F00ADC291 /* PJVisitorLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4431B7A72146674F00ADC291 /* PJVisitorLoginView.swift */; };
 		4431B7B021479AB700ADC291 /* PJOAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4431B7AF21479AB700ADC291 /* PJOAuthViewController.swift */; };
+		4431B7B22147BFE400ADC291 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4431B7B12147BFE400ADC291 /* Common.swift */; };
+		4431B7B42147C11000ADC291 /* PJNetworkTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4431B7B32147C11000ADC291 /* PJNetworkTools.swift */; };
 		44E54F5B213930200008E042 /* PJHomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E54F5A213930200008E042 /* PJHomeTableViewController.swift */; };
 		44E54F6021393ADD0008E042 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E54F5F21393ADD0008E042 /* UIView+Extension.swift */; };
 		44E54F62213944530008E042 /* UIBarButtonItem+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E54F61213944530008E042 /* UIBarButtonItem+Extension.swift */; };
@@ -37,6 +39,8 @@
 		4431B7A521464BAD00ADC291 /* PJTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PJTabBar.swift; sourceTree = "<group>"; };
 		4431B7A72146674F00ADC291 /* PJVisitorLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PJVisitorLoginView.swift; sourceTree = "<group>"; };
 		4431B7AF21479AB700ADC291 /* PJOAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PJOAuthViewController.swift; sourceTree = "<group>"; };
+		4431B7B12147BFE400ADC291 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		4431B7B32147C11000ADC291 /* PJNetworkTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PJNetworkTools.swift; sourceTree = "<group>"; };
 		44E54F5A213930200008E042 /* PJHomeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PJHomeTableViewController.swift; sourceTree = "<group>"; };
 		44E54F5F21393ADD0008E042 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		44E54F61213944530008E042 /* UIBarButtonItem+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Extension.swift"; sourceTree = "<group>"; };
@@ -141,6 +145,8 @@
 			isa = PBXGroup;
 			children = (
 				44E54F5C213933A60008E042 /* Extension */,
+				4431B7B12147BFE400ADC291 /* Common.swift */,
+				4431B7B32147C11000ADC291 /* PJNetworkTools.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -333,11 +339,13 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-douYuShow/Pods-douYuShow-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 			);
@@ -371,8 +379,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4431B7B22147BFE400ADC291 /* Common.swift in Sources */,
 				44E54F6E213D15130008E042 /* PJUserAccount.swift in Sources */,
 				44E54F62213944530008E042 /* UIBarButtonItem+Extension.swift in Sources */,
+				4431B7B42147C11000ADC291 /* PJNetworkTools.swift in Sources */,
 				44E54F6C213D0EB60008E042 /* PJUserAccountViewModel.swift in Sources */,
 				4431B7A82146674F00ADC291 /* PJVisitorLoginView.swift in Sources */,
 				44E54F6A213D03470008E042 /* PJBaseTableViewController.swift in Sources */,

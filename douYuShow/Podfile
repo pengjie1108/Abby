@@ -8,5 +8,5 @@ target 'douYuShow' do
   # Pods for douYuShow
   pod 'SnapKit'
   pod 'SVProgressHUD'
-
+  pod 'AFNetworking'
 end
