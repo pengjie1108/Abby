@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import SnapKit
 
 class PJVisitorLoginView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setUpUI()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -19,7 +21,43 @@ class PJVisitorLoginView: UIView {
     }
     
     private func setUpUI(){
+        //先添加子视图,再添加约束
         addSubview(circleView)
+        addSubview(coverView)
+        addSubview(largeHouse)
+        addSubview(tipLabel)
+        addSubview(loginBtn)
+        addSubview(registerBtn)
+        
+        //添加约束
+        circleView.snp.makeConstraints { (make) in
+            make.centerX.equalTo(self)
+            make.centerY.equalTo(self).offset(-80)
+        }
+        largeHouse.snp.makeConstraints { (make) in
+            make.center.equalTo(circleView)
+        }
+        coverView.snp.makeConstraints { (make) in
+            make.center.equalTo(circleView)
+        }
+        tipLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(circleView.snp.bottom).offset(16)
+            make.centerX.equalTo(circleView)
+        }
+        registerBtn.snp.makeConstraints { (make) in
+            make.top.equalTo(tipLabel.snp.bottom).offset(16)
+            make.left.equalTo(tipLabel)
+            make.width.equalTo(100)
+        }
+        loginBtn.snp.makeConstraints { (make) in
+            make.top.equalTo(tipLabel.snp.bottom).offset(16)
+            make.right.equalTo(tipLabel)
+            make.width.equalTo(100)
+        }
+        
+        tipLabel.preferredMaxLayoutWidth = 230
+        backgroundColor = UIColor(white: 237.0/255.0, alpha: 1)
+        
     }
     
     //圈圈
