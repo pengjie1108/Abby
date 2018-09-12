@@ -80,7 +80,7 @@ extension PJOAuthViewController: UIWebViewDelegate{
         if urlString.contains(flag){
             let query = request.url?.query ?? ""
             let code = query.substring(from: flag.endIndex)
-            print("code----------:"+code)
+
             loadAccessToken(code: code)
             //成功之后不显示后面页面
             return false
@@ -102,11 +102,14 @@ extension PJOAuthViewController: UIWebViewDelegate{
                 SVProgressHUD.showError(withStatus: "世界上最遥远的距离就是没有网络")
                 return
             }
+            //调用方法 获取用户信息
             self.loadUserInfo(res as! [String : Any])
-            print(res!)
         }
     }
     
+    /// 将参数获取
+    ///
+    /// - Parameter dict: 传入 token 和 uid 获取用户信息
     private func loadUserInfo (_ dict: [String: Any]) {
         let urlString = "https://api.weibo.com/2/users/show.json"
         let token = dict["access_token"]
@@ -119,6 +122,21 @@ extension PJOAuthViewController: UIWebViewDelegate{
                 SVProgressHUD.showError(withStatus: "世界上最遥远的距离就是没有网络")
                 return
             }
+            var userInfoDict = res as! [String : Any]
+            
+            //将登录后生成的 dict 与 userInfoDict 合并
+            for(key,value) in dict{
+                userInfoDict[key] = value
+            }
+            
+            //通过 字典 生成模型
+            let userAccount = PJUserAccount(dict: userInfoDict)
+           
+            //归档到沙盒
+              //1.路径
+            let path = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last! as NSString).appendingPathComponent("account.plist")
+              //2.归档
+            NSKeyedArchiver.archiveRootObject(userAccount, toFile: path)
         }
     }
 }
