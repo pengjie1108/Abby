@@ -81,62 +81,22 @@ extension PJOAuthViewController: UIWebViewDelegate{
             let query = request.url?.query ?? ""
             let code = query.substring(from: flag.endIndex)
 
-            loadAccessToken(code: code)
+//            loadAccessToken(code: code)
+            //获取 code 后开始调用方法
+            PJUserAccountViewModel.shared.loadAccessToken(code: code, finished: {(success) in
+                if !success {
+                    //失败
+                    SVProgressHUD.showError(withStatus: "返回值错误")
+                    return
+                }
+                //成功
+                print("登录成功")
+            })
             //成功之后不显示后面页面
             return false
         }
         return true
     }
     
-    //请求用户授权token
-    private func loadAccessToken(code: String) {
-        let urlString = "https://api.weibo.com/oauth2/access_token"
-        let para = ["client_id" : client_id,
-                    "client_secret" : client_secret,
-                    "grant_type" : "authorization_code",
-                    "code" : code,
-                    "redirect_uri" : redirect_uri]
-        
-        PJNetworkTools.shared.request(method: .POST, urlString: urlString, parameters: para) { (res, error) in
-            if error != nil {
-                SVProgressHUD.showError(withStatus: "世界上最遥远的距离就是没有网络")
-                return
-            }
-            //调用方法 获取用户信息
-            self.loadUserInfo(res as! [String : Any])
-        }
-    }
     
-    /// 将参数获取
-    ///
-    /// - Parameter dict: 传入 token 和 uid 获取用户信息
-    private func loadUserInfo (_ dict: [String: Any]) {
-        let urlString = "https://api.weibo.com/2/users/show.json"
-        let token = dict["access_token"]
-        let uid = dict["uid"]!
-        
-        let para = ["access_token": token,
-                    "uid": uid];
-        PJNetworkTools.shared.request(method: .GET, urlString: urlString, parameters: para) { (res, error) in
-            if error != nil {
-                SVProgressHUD.showError(withStatus: "世界上最遥远的距离就是没有网络")
-                return
-            }
-            var userInfoDict = res as! [String : Any]
-            
-            //将登录后生成的 dict 与 userInfoDict 合并
-            for(key,value) in dict{
-                userInfoDict[key] = value
-            }
-            
-            //通过 字典 生成模型
-            let userAccount = PJUserAccount(dict: userInfoDict)
-           
-            //归档到沙盒
-              //1.路径
-            let path = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last! as NSString).appendingPathComponent("account.plist")
-              //2.归档
-            NSKeyedArchiver.archiveRootObject(userAccount, toFile: path)
-        }
-    }
 }

@@ -13,8 +13,12 @@ class PJUserAccount: NSObject,NSCoding{
     // 授权唯一票据
     var access_token: String?
     
-    // token生命周期,单位秒
-    var expires_in: TimeInterval = 0
+    // access_token的生命周期，单位是秒数。
+    var expires_in: TimeInterval = 0{
+        didSet {
+            expires_date = Date(timeIntervalSinceNow: expires_in)
+        }
+    }
     
     // token 过期时间
     var expires_date: Date?
