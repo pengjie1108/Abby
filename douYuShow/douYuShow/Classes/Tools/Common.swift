@@ -9,5 +9,5 @@
 import Foundation
 
 let client_id = "3271022753"
-let redirect_uri = "http://www.baidu.com"
-let client_secret = "549070924d556187f195866a3caa2d6b"
+let redirect_uri = "www.baidu.com"
+let client_secret = "8caa648cd61b3a7c19eb67290ecc9830"

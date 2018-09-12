@@ -79,28 +79,46 @@ extension PJOAuthViewController: UIWebViewDelegate{
         //3.截取 code
         if urlString.contains(flag){
             let query = request.url?.query ?? ""
-            print("1"+query)
             let code = query.substring(from: flag.endIndex)
-            print("1"+code)
+            print("code----------:"+code)
             loadAccessToken(code: code)
+            //成功之后不显示后面页面
             return false
         }
         return true
     }
     
-    private func loadAccessToken(code: String){
+    //请求用户授权token
+    private func loadAccessToken(code: String) {
         let urlString = "https://api.weibo.com/oauth2/access_token"
         let para = ["client_id" : client_id,
                     "client_secret" : client_secret,
                     "grant_type" : "authorization_code",
                     "code" : code,
                     "redirect_uri" : redirect_uri]
+        
         PJNetworkTools.shared.request(method: .POST, urlString: urlString, parameters: para) { (res, error) in
             if error != nil {
-                SVProgressHUD.showError(withStatus: "没有网络")
+                SVProgressHUD.showError(withStatus: "世界上最遥远的距离就是没有网络")
                 return
             }
+            self.loadUserInfo(res as! [String : Any])
             print(res!)
+        }
+    }
+    
+    private func loadUserInfo (_ dict: [String: Any]) {
+        let urlString = "https://api.weibo.com/2/users/show.json"
+        let token = dict["access_token"]
+        let uid = dict["uid"]!
+        
+        let para = ["access_token": token,
+                    "uid": uid];
+        PJNetworkTools.shared.request(method: .GET, urlString: urlString, parameters: para) { (res, error) in
+            if error != nil {
+                SVProgressHUD.showError(withStatus: "世界上最遥远的距离就是没有网络")
+                return
+            }
         }
     }
 }
