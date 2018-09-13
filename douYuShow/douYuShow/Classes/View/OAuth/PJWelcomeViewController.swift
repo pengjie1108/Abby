@@ -75,7 +75,7 @@ class PJWelcomeViewController: UIViewController {
                 self.welcomeLabel.alpha = 1
             }, completion: { (_) in
                 //跳转到首页(tabBar 控制器)
-                UIApplication.shared.keyWindow?.rootViewController = PJMainTabBarController()
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: SWITCHROOTVIEWCONTROLLERNOTI), object: "welcomeVc")
             })
         })
     }

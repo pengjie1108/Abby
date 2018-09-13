@@ -92,7 +92,10 @@ extension PJOAuthViewController: UIWebViewDelegate{
                 }
                 //成功
                 print("登录成功")
-                UIApplication.shared.keyWindow?.rootViewController = PJWelcomeViewController()
+                self.dismiss(animated: true, completion: {
+                    //发送通知
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: SWITCHROOTVIEWCONTROLLERNOTI), object: nil)
+                })
             })
             //成功之后不显示后面页面
             return false

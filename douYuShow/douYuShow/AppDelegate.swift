@@ -19,7 +19,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = setupRootViewController()
         window?.makeKeyAndVisible()
+        //注册通知来切换根控制器
+        NotificationCenter.default.addObserver(self, selector: #selector(switchRootViewController), name: NSNotification.Name(rawValue: SWITCHROOTVIEWCONTROLLERNOTI), object: nil)
         return true
+    }
+    
+    /*
+     判断用户是否登录
+        -没登录
+           -PJMainVc(访客视图界面)
+             -OAuthVc(用户名和密码登录)
+             -PJWelcomeVc(欢迎界面)
+             -PJMainVC(首页)
+        -如果登录了
+            -PJWelcomeVc(欢迎界面)
+            -PJMainVC(首页)
+     */
+    @objc private func switchRootViewController(noti: Notification){
+        if let _ = noti.object {
+             //object 为空,跳转到主控制器
+            window?.rootViewController = PJMainTabBarController()
+        }else{
+            //object 跳转到欢迎界面
+            window?.rootViewController = PJWelcomeViewController()
+        }
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
