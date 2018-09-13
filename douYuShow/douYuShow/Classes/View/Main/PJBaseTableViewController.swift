@@ -22,7 +22,7 @@ class PJBaseTableViewController: UITableViewController,PJVisitorLoginViewDelegat
         print(#function)
     }
     
-    var userLogin = false
+    var userLogin = PJUserAccountViewModel.shared.userLogin
     
     lazy var visitorView = PJVisitorLoginView(frame: UIScreen.main.bounds)
     

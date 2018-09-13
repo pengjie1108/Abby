@@ -13,8 +13,7 @@ import UIKit
  3.数据缓存
  */
 
-
-//private let userAccount_Path = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last! as NSString).appendingPathComponent("account.plist")
+private let userAccount_Path = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last! as NSString).appendingPathComponent("account.plist")
 
 class PJUserAccountViewModel: NSObject {
     
@@ -23,6 +22,30 @@ class PJUserAccountViewModel: NSObject {
     
     //需要持有一个模型对象
     var account : PJUserAccount?
+    
+    //在对单例对象实例化时,就调用 load 方法的返回值给 account 赋值
+    private override init() {
+        super.init()
+        self.account = self.loadUserAccount()
+    }
+    
+    //判断用户是否登录 //&& isExpires == false
+    var userLogin: Bool {
+        //token 存在且 未过期
+        if account?.access_token != nil && isExpires == false {
+        return true
+        }
+        return false
+    }
+    
+    //token是否过期
+    var isExpires: Bool{
+        //是否过期
+        if account?.expires_date?.compare(Date()) == .orderedDescending{
+            return false
+        }
+        return true
+    }
     
     /// 获取登录信息
     ///
@@ -60,7 +83,6 @@ class PJUserAccountViewModel: NSObject {
         let urlString = "https://api.weibo.com/2/users/show.json"
         let token = dict["access_token"]
         let uid = dict["uid"]!
-        
         let para = ["access_token": token,
                     "uid": uid];
         PJNetworkTools.shared.request(method: .GET, urlString: urlString, parameters: para) { (res, error) in
@@ -79,16 +101,25 @@ class PJUserAccountViewModel: NSObject {
             let userAccount = PJUserAccount(dict: userInfoDict)
             
             //归档到沙盒
-            //1.路径
-            let path = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last! as NSString).appendingPathComponent("account.plist")
-            //2.归档
-            NSKeyedArchiver.archiveRootObject(userAccount, toFile: path)
+            self.saveUserAccount(account: userAccount)
             //执行成功的回调
             loadUserInfoFinished(true)
         }
     }
     
+    //对 account 做归档
+    private func saveUserAccount(account: PJUserAccount){
+        NSKeyedArchiver.archiveRootObject(account, toFile: userAccount_Path)
+    }
     
+    //从沙盒通过解档的方法读取用户信息
+    func loadUserAccount() -> PJUserAccount? {
+        let account = NSKeyedUnarchiver.unarchiveObject(withFile: userAccount_Path)
+        if let acc = account as? PJUserAccount{
+            return acc
+        }
+        return nil
+    }
     
     
 }

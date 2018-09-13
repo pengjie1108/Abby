@@ -91,6 +91,7 @@ extension PJOAuthViewController: UIWebViewDelegate{
                 }
                 //成功
                 print("登录成功")
+                UIApplication.shared.keyWindow?.rootViewController = PJWelcomeViewController()
             })
             //成功之后不显示后面页面
             return false

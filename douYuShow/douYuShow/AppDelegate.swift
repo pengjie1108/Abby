@@ -45,7 +45,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func setupRootViewController() -> UIViewController {
-        return PJMainTabBarController()
+
+        return PJUserAccountViewModel.shared.userLogin ? PJWelcomeViewController() : PJMainTabBarController ()
     }
 
 }
