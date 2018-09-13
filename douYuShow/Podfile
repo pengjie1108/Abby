@@ -9,4 +9,5 @@ target 'douYuShow' do
   pod 'SnapKit'
   pod 'SVProgressHUD'
   pod 'AFNetworking'
+  pod 'SDWebImage'
 end

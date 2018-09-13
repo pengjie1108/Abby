@@ -29,10 +29,14 @@ class PJUserAccountViewModel: NSObject {
         self.account = self.loadUserAccount()
     }
     
+    var headURL: URL? {
+        return URL(string: account?.avatar_large ?? "")
+    }
+    
     //判断用户是否登录 //&& isExpires == false
     var userLogin: Bool {
         //token 存在且 未过期
-        if account?.access_token != nil && isExpires == false {
+        if account?.access_token != nil {
         return true
         }
         return false
