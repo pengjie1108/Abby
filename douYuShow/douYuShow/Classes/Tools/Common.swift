@@ -18,3 +18,10 @@ let client_secret = "8caa648cd61b3a7c19eb67290ecc9830"
 let ScreenWidth: CGFloat = UIScreen.main.bounds.width
 let ScreenHeight: CGFloat = UIScreen.main.bounds.height
 
+func randomColor() -> UIColor{
+    let r = CGFloat(arc4random()%256)
+    let g = CGFloat(arc4random()%256)
+    let b = CGFloat(arc4random()%256)
+    return UIColor(red: r / 255, green: g / 255, blue: b / 255, alpha: 1)
+}
+

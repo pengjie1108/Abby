@@ -9,7 +9,12 @@
 import UIKit
 import YYModel
 
+//cell 重用标识符
+private let CELLID = "reuseIdentifier"
 class PJHomeTableViewController: PJBaseTableViewController {
+    
+//    var dataArray:[PJHomeModel] = [PJHomeModel]()
+    var homeViewModel: PJHomeViewModel = PJHomeViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,60 +25,48 @@ class PJHomeTableViewController: PJBaseTableViewController {
             visitorView.updateUI(title: "关注一些人,回到这里看看有什么惊喜哟", imageName: "visitordiscover_feed_image_smallicon",isHome: true)
             return
         }
+        setupTableViewInfo()
         loadData()
     }
-    
-    
-    
-    private func setupUI(){
-//        navigationController?.view.insertSubview(<#T##view: UIView##UIView#>, belowSubview: (navigationController?.navigationBar)!)
-    }
-
-   
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
-    }
-
-    
-
 }
 
-//请求微博首页数据
+//MARK: 设置 tableView 信息
+extension PJHomeTableViewController{
+    fileprivate func setupTableViewInfo(){
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: CELLID)
+    }
+}
+
+//MARK: 请求微博首页数据
 extension PJHomeTableViewController{
     fileprivate func loadData(){
-        PJNetworkTools.shared.homeLoadData { (response, error) in
-            if error != nil{
+        homeViewModel.getHomeData { (isSuccess) in
+            //请求失败
+            if !isSuccess{
                 print("请求失败")
                 return
             }
-            //解析 response
-            //在 if let 或者 guard let 中 转类型的时候 一般情况 都需要使用的是 as
-            guard let res = response as? [String: Any] else {
-                return
-            }
-            //判断是否是 nil 而且是字典,获取字典中key 中数组数组
-            guard let resArr = res["statuses"] as? [[String: Any]] else{
-                return
-            }
-            //字典转模型
-            let statusArray = NSArray.yy_modelArray(with: PJHomeModel.self, json: resArr) as! [PJHomeModel]
+            //请求成功
+            self.tableView.reloadData()
         }
     }
 }
+
+extension PJHomeTableViewController{
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
+       return homeViewModel.dataArray.count
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: CELLID, for: indexPath)
+        cell.backgroundColor = randomColor()
+        return cell
+    }
+}
+
+
 
 extension PJHomeTableViewController{
     fileprivate func setNavBar(){
