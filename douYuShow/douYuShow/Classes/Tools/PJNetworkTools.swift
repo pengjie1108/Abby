@@ -29,7 +29,6 @@ class PJNetworkTools: AFHTTPSessionManager {
         let success = {
             (task: URLSessionDataTask,responseObjcet: Any?) -> () in
             //执行成功的回调
-//            print(responseObjcet!)
             finished(responseObjcet,nil)
         }
         
@@ -45,5 +44,16 @@ class PJNetworkTools: AFHTTPSessionManager {
         }else{
             post(urlString, parameters: parameters, progress: nil, success: success, failure: failure)
         }
+    }
+}
+
+extension PJNetworkTools{
+    func homeLoadData(finished: @escaping (Any?, Error?) -> ()){
+        //URL
+        let urlString = "https://api.weibo.com/2/statuses/home_timeline.json"
+        //请求参数
+        let params = ["access_token": PJUserAccountViewModel.shared.accessToken]
+        //发送请求
+        request(method: .GET, urlString: urlString, parameters: params, finished: finished)
     }
 }

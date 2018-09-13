@@ -55,19 +55,13 @@ class PJHomeTableViewController: PJBaseTableViewController {
 //请求微博首页数据
 extension PJHomeTableViewController{
     fileprivate func loadData(){
-        //URL
-        let urlString = "https://api.weibo.com/2/statuses/home_timeline.json"
-        //请求参数
-        let params = ["access_token": PJUserAccountViewModel.shared.accessToken]
-        //发送请求
-        PJNetworkTools.shared.request(method: .GET, urlString: urlString, parameters: params) { (response, error) in
+        PJNetworkTools.shared.homeLoadData { (response, error) in
             if error != nil{
                 print("请求失败")
                 return
             }
-//            print(response!)
             //解析 response
-              //在 if let 或者 guard let 中 转类型的时候 一般情况 都需要使用的是 as
+            //在 if let 或者 guard let 中 转类型的时候 一般情况 都需要使用的是 as
             guard let res = response as? [String: Any] else {
                 return
             }
@@ -77,7 +71,6 @@ extension PJHomeTableViewController{
             }
             //字典转模型
             let statusArray = NSArray.yy_modelArray(with: PJHomeModel.self, json: resArr) as! [PJHomeModel]
-            
         }
     }
 }
