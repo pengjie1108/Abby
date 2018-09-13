@@ -33,7 +33,10 @@ class PJHomeTableViewController: PJBaseTableViewController {
 //MARK: 设置 tableView 信息
 extension PJHomeTableViewController{
     fileprivate func setupTableViewInfo(){
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: CELLID)
+        //注册 cell
+        tableView.register(PJHomeCell.self, forCellReuseIdentifier: CELLID)
+        //设置 cell 高度
+        tableView.rowHeight = 200
     }
 }
 
@@ -60,8 +63,7 @@ extension PJHomeTableViewController{
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CELLID, for: indexPath)
-        cell.backgroundColor = randomColor()
+        let cell = tableView.dequeueReusableCell(withIdentifier: CELLID, for: indexPath) as! PJHomeCell
         return cell
     }
 }
