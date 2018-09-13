@@ -51,6 +51,13 @@ class PJUserAccountViewModel: NSObject {
         return true
     }
     
+    var accessToken: String?{
+        if userLogin {
+            return account?.access_token
+        }
+        return nil
+    }
+    
     /// 获取登录信息
     ///
     /// - Parameters:

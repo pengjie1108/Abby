@@ -29,7 +29,7 @@ class PJNetworkTools: AFHTTPSessionManager {
         let success = {
             (task: URLSessionDataTask,responseObjcet: Any?) -> () in
             //执行成功的回调
-            print(responseObjcet!)
+//            print(responseObjcet!)
             finished(responseObjcet,nil)
         }
         

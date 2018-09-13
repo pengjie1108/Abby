@@ -10,4 +10,5 @@ target 'douYuShow' do
   pod 'SVProgressHUD'
   pod 'AFNetworking'
   pod 'SDWebImage'
+  pod 'YYModel'
 end
