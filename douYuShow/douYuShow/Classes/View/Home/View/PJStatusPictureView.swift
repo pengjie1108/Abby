@@ -15,19 +15,21 @@ private let itemMargin: CGFloat = 5
 /// cell 单位宽高
 private let cellWH = (ScreenWidth - 2 * HOMECELLMARGIN - 2 * itemMargin) / 3
 
-
 class PJStatusPictureView: UICollectionView {
 
     var picUrls: [PJPictureUrlsModel]?{
         didSet{
             print("图片数量:",picUrls!.count)
             //计算配图需要的尺寸
-//            let size = dealPictureViewSize(count: picUrls!.count)
-            let size = dealPictureViewSize(count: 9)
+            let size = dealPictureViewSize(count: picUrls!.count)
             //更新计算后的 size
             self.snp.updateConstraints { (make) in
                 make.size.equalTo(size)
             }
+            //需要进行 layoutIfNeed 同步 itemsize 和配图大小.
+            layoutIfNeeded()
+            //刷新 UI
+            reloadData()
         }
     }
     
@@ -62,7 +64,7 @@ class PJStatusPictureView: UICollectionView {
         //设置代理
         dataSource = self
         //注册 cell
-        register(UICollectionViewCell.self, forCellWithReuseIdentifier: CELLID)
+        register(PJStatusPictureViewCell.self, forCellWithReuseIdentifier: CELLID)
         self.snp.makeConstraints { (make) in
             make.size.equalTo(CGSize(width: 100, height: 100))
         }
@@ -71,13 +73,70 @@ class PJStatusPictureView: UICollectionView {
 
 extension PJStatusPictureView: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 9
+        return picUrls?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELLID, for: indexPath)
-        cell.backgroundColor = randomColor()
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELLID, for: indexPath) as! PJStatusPictureViewCell
+        cell.pictureUrlModel = picUrls![indexPath.item]
         return cell
+    }
+}
+
+
+
+/// 配图 cell
+class PJStatusPictureViewCell: UICollectionViewCell {
+    
+    /// 模型属性,供外界赋值
+    var pictureUrlModel: PJPictureUrlsModel?{
+        didSet{
+            //图片赋值
+            bgImageView.pj_setImage(urlString: pictureUrlModel?.thumbnail_pic, placeholderImgName: "avatar_default_big")
+            //gif 赋值
+            if let thumbnail_pic = pictureUrlModel?.thumbnail_pic, thumbnail_pic.hasSuffix(".gif"){
+                //显示 gif
+                gifImageView.isHidden = false
+            }else {
+                //隐藏 gif
+                gifImageView.isHidden = true
+            }
+        }
+    }
+    
+    ///  配图图片
+    private lazy var bgImageView: UIImageView = {
+        let img = UIImageView(imgName: "avatar_default_big")
+        img.contentMode = .scaleAspectFill
+        img.clipsToBounds = true
+        return img
+    }()
+    
+    /// 配图 gif
+    private lazy var gifImageView: UIImageView = UIImageView(imgName: "timeline_image_gif")
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupUI()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    /// 配图 cell 的 UI 设置
+    private func setupUI(){
+        backgroundColor = randomColor()
+        //1添加控件
+        contentView.addSubview(bgImageView)
+        contentView.addSubview(gifImageView)
+        //2添加约束
+        bgImageView.snp.makeConstraints { (make) in
+            make.edges.equalTo(contentView)
+        }
+        gifImageView.snp.makeConstraints { (make) in
+            make.top.right.equalTo(contentView)
+        }
     }
 }
 
