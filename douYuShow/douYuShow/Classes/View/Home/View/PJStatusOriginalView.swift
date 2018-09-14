@@ -19,6 +19,8 @@ class PJStatusOriginalView: UIView {
            headImageView.pj_setImage(urlString: statusViewModel?.homeModel?.user?.profile_image_url, placeholderImgName: "avatar_default")
 
            membershipImageView.image = statusViewModel?.mbrankImage
+            
+           avatarImageView.image = statusViewModel?.verifiedImage
 
            contentLabel.text = statusViewModel?.homeModel?.text
         }
