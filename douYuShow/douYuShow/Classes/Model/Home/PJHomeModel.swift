@@ -22,4 +22,13 @@ class PJHomeModel: NSObject {
     var user: PJUserModel?
     /// 转发微博数据
     var retweeted_status:PJHomeModel?
+    /// 配图数据
+    var pic_urls: [PJPictureUrlsModel]?
+    
+    /// 返回容器中所需要存放的数据类型
+    ///
+    /// - Returns: 返回的数据格式
+    class func modelContainerPropertyGenericClass() -> [String: Any]{
+        return ["pic_urls": PJPictureUrlsModel.self]
+    }
 }

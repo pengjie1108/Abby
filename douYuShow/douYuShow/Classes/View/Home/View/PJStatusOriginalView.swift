@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import SnapKit
 
 class PJStatusOriginalView: UIView {
+    
+    var originalViewBottomConstraint: Constraint?
     
     var statusViewModel: PJStatusViewModel?{
         didSet{
@@ -23,6 +26,26 @@ class PJStatusOriginalView: UIView {
            avatarImageView.image = statusViewModel?.verifiedImage
 
            contentLabel.text = statusViewModel?.homeModel?.text
+        
+           
+           //卸载约束
+           originalViewBottomConstraint?.deactivate()
+           
+            if let picUrls = statusViewModel?.homeModel?.pic_urls, picUrls.count > 0 {
+                //有配图
+                pictureView.picUrls = picUrls
+                //设置约束
+                self.snp.makeConstraints { (make) in
+                    originalViewBottomConstraint = make.bottom.equalTo(pictureView).offset(HOMECELLMARGIN).constraint
+                }
+                pictureView.isHidden = false
+            }else{
+                //没有配图
+                self.snp.makeConstraints { (make) in
+                    originalViewBottomConstraint = make.bottom.equalTo(contentLabel).offset(HOMECELLMARGIN).constraint
+                }
+                pictureView.isHidden = true
+            }
         }
     }
     
@@ -38,31 +61,25 @@ class PJStatusOriginalView: UIView {
     //MARK:视图属性
     /// 头像图片
     private lazy var headImageView: UIImageView = UIImageView(imgName: "avatar_default")
-    
     /// 昵称
     private lazy var nameLabel: UILabel = UILabel(title: "昵称", textColor: UIColor.black, fontSize: FONTSIZEOFNORMAL)
-    
     /// 会员图片
     private lazy var membershipImageView : UIImageView = UIImageView(imgName: "common_icon_membership")
-    
     /// 微博时间
     private lazy var timeLabel: UILabel = UILabel(title: "微博时间", textColor:  ThemeColor, fontSize: FONTSIZEOFSMALL)
-    
     /// 微博来源
     private lazy var sourceLable: UILabel = UILabel(title: "微博来源", textColor:  ThemeColor, fontSize: FONTSIZEOFSMALL)
-    
     /// 头像角标
     private lazy var avatarImageView : UIImageView = UIImageView(imgName: "avatar_vgirl")
-    
     /// 微博内容
     private lazy var contentLabel: UILabel = UILabel(title: "没有内容", textColor: UIColor.black, fontSize: FONTSIZEOFNORMAL)
-    
     /// 微博配图
     private lazy var pictureView: PJStatusPictureView = PJStatusPictureView()
     
     //MARK:UI 设置
     private func setupUI(){
         backgroundColor = randomColor()
+        
         //1添加控件
         addSubview(headImageView)
         addSubview(nameLabel)
@@ -72,6 +89,7 @@ class PJStatusOriginalView: UIView {
         addSubview(avatarImageView)
         addSubview(contentLabel)
         addSubview(pictureView)
+        
         //2添加约束
         headImageView.snp.makeConstraints { (make) in
             make.left.top.equalTo(HOMECELLMARGIN)
@@ -103,12 +121,12 @@ class PJStatusOriginalView: UIView {
             make.width.equalTo(ScreenWidth - 2 * HOMECELLMARGIN)
         }
         pictureView.snp.makeConstraints { (make) in
-            make.size.equalTo(CGSize(width: 100, height: 100))
             make.left.equalTo(HOMECELLMARGIN)
             make.top.equalTo(contentLabel.snp.bottom).offset(HOMECELLMARGIN)
         }
         self.snp.makeConstraints { (make) in
-            make.bottom.equalTo(pictureView).offset(HOMECELLMARGIN)
+//            make.bottom.equalTo(pictureView).offset(HOMECELLMARGIN)
+            originalViewBottomConstraint = make.bottom.equalTo(pictureView).offset(HOMECELLMARGIN).constraint
         }
     }
     
