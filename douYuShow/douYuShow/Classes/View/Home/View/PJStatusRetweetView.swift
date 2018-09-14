@@ -11,8 +11,15 @@ import UIKit
 /// 转发视图
 class PJStatusRetweetView: UIView {
 
+    var statusViewModel: PJStatusViewModel?{
+        didSet{
+            contentLabel.text = statusViewModel?.homeModel?.retweeted_status?.text
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setupUI()
     }
     
     required init?(coder aDecoder: NSCoder) {

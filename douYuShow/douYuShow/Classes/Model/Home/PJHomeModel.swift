@@ -20,4 +20,6 @@ class PJHomeModel: NSObject {
     var source: String?
     /// 用户信息
     var user: PJUserModel?
+    /// 转发微博数据
+    var retweeted_status:PJHomeModel?
 }

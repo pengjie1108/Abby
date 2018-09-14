@@ -26,7 +26,6 @@ class PJStatusOriginalView: UIView {
         }
     }
     
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
@@ -36,20 +35,32 @@ class PJStatusOriginalView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK:视图属性
+    /// 头像图片
     private lazy var headImageView: UIImageView = UIImageView(imgName: "avatar_default")
     
+    /// 昵称
     private lazy var nameLabel: UILabel = UILabel(title: "昵称", textColor: UIColor.black, fontSize: FONTSIZEOFNORMAL)
     
+    /// 会员图片
     private lazy var membershipImageView : UIImageView = UIImageView(imgName: "common_icon_membership")
     
+    /// 微博时间
     private lazy var timeLabel: UILabel = UILabel(title: "微博时间", textColor:  ThemeColor, fontSize: FONTSIZEOFSMALL)
     
+    /// 微博来源
     private lazy var sourceLable: UILabel = UILabel(title: "微博来源", textColor:  ThemeColor, fontSize: FONTSIZEOFSMALL)
     
+    /// 头像角标
     private lazy var avatarImageView : UIImageView = UIImageView(imgName: "avatar_vgirl")
     
+    /// 微博内容
     private lazy var contentLabel: UILabel = UILabel(title: "没有内容", textColor: UIColor.black, fontSize: FONTSIZEOFNORMAL)
     
+    /// 微博配图
+    private lazy var pictureView: PJStatusPictureView = PJStatusPictureView()
+    
+    //MARK:UI 设置
     private func setupUI(){
         backgroundColor = randomColor()
         //1添加控件
@@ -60,6 +71,7 @@ class PJStatusOriginalView: UIView {
         addSubview(sourceLable)
         addSubview(avatarImageView)
         addSubview(contentLabel)
+        addSubview(pictureView)
         //2添加约束
         headImageView.snp.makeConstraints { (make) in
             make.left.top.equalTo(HOMECELLMARGIN)
@@ -90,8 +102,13 @@ class PJStatusOriginalView: UIView {
             make.top.equalTo(headImageView.snp.bottom).offset(HOMECELLMARGIN)
             make.width.equalTo(ScreenWidth - 2 * HOMECELLMARGIN)
         }
+        pictureView.snp.makeConstraints { (make) in
+            make.size.equalTo(CGSize(width: 100, height: 100))
+            make.left.equalTo(HOMECELLMARGIN)
+            make.top.equalTo(contentLabel.snp.bottom).offset(HOMECELLMARGIN)
+        }
         self.snp.makeConstraints { (make) in
-            make.bottom.equalTo(contentLabel).offset(HOMECELLMARGIN)
+            make.bottom.equalTo(pictureView).offset(HOMECELLMARGIN)
         }
     }
     
