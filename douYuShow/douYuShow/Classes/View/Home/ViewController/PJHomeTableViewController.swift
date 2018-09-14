@@ -36,7 +36,9 @@ extension PJHomeTableViewController{
         //注册 cell
         tableView.register(PJHomeCell.self, forCellReuseIdentifier: CELLID)
         //设置 cell 高度
-        tableView.rowHeight = 200
+//        tableView.rowHeight = 200
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 200
     }
 }
 

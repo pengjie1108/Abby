@@ -48,14 +48,21 @@ class PJHomeCell: UITableViewCell {
     
     private lazy var originalView: PJStatusOriginalView = PJStatusOriginalView()
     
+    private lazy var bottomView: PJStatusBottomView = PJStatusBottomView()
+    
     private func setupUI(){
         backgroundColor = randomColor()
         //添加控件
         contentView.addSubview(originalView)
+        contentView.addSubview(bottomView)
         //添加约束
         originalView.snp.makeConstraints { (make) in
             make.left.top.right.equalTo(contentView)
-//            make.height.equalTo(50)
+        }
+        bottomView.snp.makeConstraints { (make) in
+            make.top.equalTo(originalView.snp.bottom)
+            make.left.right.bottom.equalTo(contentView)
+            make.height.equalTo(35)
         }
     }
 
