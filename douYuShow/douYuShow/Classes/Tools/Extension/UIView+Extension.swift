@@ -8,6 +8,14 @@
 
 import UIKit
 
+
+extension UIImageView{
+    //快速创建 ImageView
+    convenience init(imgName: String){
+        self.init(image: UIImage(named: imgName))
+    }
+}
+
 extension UILabel{
     convenience init(title: String, textColor: UIColor, fontSize: CGFloat ){
         self.init()
@@ -16,7 +24,7 @@ extension UILabel{
         self.textColor = textColor
         self.font = UIFont.systemFont(ofSize: fontSize)
         self.numberOfLines = 0
-        self.textAlignment = .center
+//        self.textAlignment = .center
         //自适应大小
         self.sizeToFit()
     }

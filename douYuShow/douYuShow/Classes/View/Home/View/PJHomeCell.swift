@@ -31,6 +31,12 @@ import UIKit
 
 class PJHomeCell: UITableViewCell {
 
+    var statusViewModel: PJStatusViewModel?{
+        didSet{
+            originalView.statusViewModel = statusViewModel
+        }
+    }
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
@@ -47,9 +53,9 @@ class PJHomeCell: UITableViewCell {
         //添加控件
         contentView.addSubview(originalView)
         //添加约束
-        contentView.snp.makeConstraints { (make) in
+        originalView.snp.makeConstraints { (make) in
             make.left.top.right.equalTo(contentView)
-            make.height.equalTo(50)
+//            make.height.equalTo(50)
         }
     }
 

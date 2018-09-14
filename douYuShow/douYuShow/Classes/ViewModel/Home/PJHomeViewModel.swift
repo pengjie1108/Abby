@@ -14,7 +14,7 @@ import UIKit
  */
 class PJHomeViewModel: NSObject {
 
-    var dataArray:[PJHomeModel] = [PJHomeModel]()
+    var dataArray:[PJStatusViewModel] = [PJStatusViewModel]()
     
 }
 
@@ -38,8 +38,15 @@ extension PJHomeViewModel{
             }
             //字典转模型
             let statusArray = NSArray.yy_modelArray(with: PJHomeModel.self, json: resArr) as! [PJHomeModel]
+            //将模型数组每个元素放入 statusVM 属性中
+            var tempArray:[PJStatusViewModel] = [PJStatusViewModel]()
+            for homeModel in statusArray{
+                let statuViewModel = PJStatusViewModel()
+                statuViewModel.homeModel = homeModel
+                tempArray.append(statuViewModel)
+            }
             //赋值
-            self.dataArray = statusArray
+            self.dataArray = tempArray
             //刷新
             finish(true)
         }
