@@ -14,6 +14,10 @@ extension UIImageView{
     convenience init(imgName: String){
         self.init(image: UIImage(named: imgName))
     }
+    
+    func pj_setImage(urlString: String?, placeholderImgName: String?){
+        self.sd_setImage(with: URL(string: urlString ?? ""), placeholderImage: UIImage(named: placeholderImgName ?? ""))
+    }
 }
 
 extension UILabel{

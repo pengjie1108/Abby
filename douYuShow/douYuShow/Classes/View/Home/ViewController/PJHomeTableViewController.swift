@@ -64,6 +64,8 @@ extension PJHomeTableViewController{
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CELLID, for: indexPath) as! PJHomeCell
+        //cell 的 VM 和首页的 VM 传递
+        cell.statusViewModel = homeViewModel.dataArray[indexPath.row]
         return cell
     }
 }

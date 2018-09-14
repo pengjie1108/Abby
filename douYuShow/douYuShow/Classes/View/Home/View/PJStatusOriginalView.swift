@@ -12,7 +12,9 @@ class PJStatusOriginalView: UIView {
     
     var statusViewModel: PJStatusViewModel?{
         didSet{
+            //在这里给子控件进行赋值
            nameLabel.text = statusViewModel?.homeModel?.user?.name
+           headImageView.pj_setImage(urlString: statusViewModel?.homeModel?.user?.profile_image_url, placeholderImgName: "avatar_default")
         }
     }
     
