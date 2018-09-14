@@ -12,9 +12,15 @@ class PJStatusOriginalView: UIView {
     
     var statusViewModel: PJStatusViewModel?{
         didSet{
-            //在这里给子控件进行赋值
+           //vm设置后  在这里给子控件进行赋值
+
            nameLabel.text = statusViewModel?.homeModel?.user?.name
+
            headImageView.pj_setImage(urlString: statusViewModel?.homeModel?.user?.profile_image_url, placeholderImgName: "avatar_default")
+
+           membershipImageView.image = statusViewModel?.mbrankImage
+
+           contentLabel.text = statusViewModel?.homeModel?.text
         }
     }
     
@@ -40,7 +46,7 @@ class PJStatusOriginalView: UIView {
     
     private lazy var avatarImageView : UIImageView = UIImageView(imgName: "avatar_vgirl")
     
-    private lazy var contentLabel: UILabel = UILabel(title: "这是一堆测试数据,测试数据,这是一堆测试数据,测试数据这是一堆测试数据,测试数据这是一堆测试数据,测试数据这是一堆测试数据,测试数据这是一堆测试数据,测试数据这是一堆测试数据,测试数据", textColor: UIColor.black, fontSize: 14)
+    private lazy var contentLabel: UILabel = UILabel(title: "没有内容", textColor: UIColor.black, fontSize: 14)
     
     private func setupUI(){
         backgroundColor = randomColor()

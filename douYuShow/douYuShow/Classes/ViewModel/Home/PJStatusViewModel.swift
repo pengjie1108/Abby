@@ -16,6 +16,20 @@ import UIKit
 
 class PJStatusViewModel: NSObject {
     
-    var homeModel: PJHomeModel?
+    var mbrankImage: UIImage?
+    
+    var homeModel: PJHomeModel?{
+        didSet{
+            mbrankImage = dealMbrankImage(mbrank: homeModel?.user?.mbrank ?? 0)
+        }
+    }
+}
 
+extension PJStatusViewModel{
+    fileprivate func dealMbrankImage(mbrank: Int) -> UIImage?{
+        if mbrank > 0 && mbrank < 7 {
+            return UIImage(named: "common_icon_membership_level\(mbrank)")
+        }
+        return UIImage(named: "common_icon_membership")
+    }
 }
