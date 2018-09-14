@@ -59,7 +59,7 @@ extension PJStatusBottomView{
         let button = UIButton()
         button.setTitle(title, for: UIControlState.normal)
         button.setTitleColor(UIColor.darkGray, for: UIControlState.normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: FONTSIZEOFNORMAL)
         button.setImage(UIImage(named: imgName), for: .normal)
         button.setBackgroundImage(UIImage(named: "timeline_card_bottom_background"), for: .normal)
         button.setBackgroundImage(UIImage(named:"timeline_card_bottom_background_highlighted"), for: UIControlState.highlighted)

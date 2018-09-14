@@ -38,17 +38,17 @@ class PJStatusOriginalView: UIView {
     
     private lazy var headImageView: UIImageView = UIImageView(imgName: "avatar_default")
     
-    private lazy var nameLabel: UILabel = UILabel(title: "昵称", textColor: UIColor.black, fontSize: 14)
+    private lazy var nameLabel: UILabel = UILabel(title: "昵称", textColor: UIColor.black, fontSize: FONTSIZEOFNORMAL)
     
     private lazy var membershipImageView : UIImageView = UIImageView(imgName: "common_icon_membership")
     
-    private lazy var timeLabel: UILabel = UILabel(title: "微博时间", textColor:  UIColor.orange, fontSize: 10)
+    private lazy var timeLabel: UILabel = UILabel(title: "微博时间", textColor:  ThemeColor, fontSize: FONTSIZEOFSMALL)
     
-    private lazy var sourceLable: UILabel = UILabel(title: "微博来源", textColor:  UIColor.orange, fontSize: 10)
+    private lazy var sourceLable: UILabel = UILabel(title: "微博来源", textColor:  ThemeColor, fontSize: FONTSIZEOFSMALL)
     
     private lazy var avatarImageView : UIImageView = UIImageView(imgName: "avatar_vgirl")
     
-    private lazy var contentLabel: UILabel = UILabel(title: "没有内容", textColor: UIColor.black, fontSize: 14)
+    private lazy var contentLabel: UILabel = UILabel(title: "没有内容", textColor: UIColor.black, fontSize: FONTSIZEOFNORMAL)
     
     private func setupUI(){
         backgroundColor = randomColor()
@@ -62,23 +62,23 @@ class PJStatusOriginalView: UIView {
         addSubview(contentLabel)
         //2添加约束
         headImageView.snp.makeConstraints { (make) in
-            make.left.top.equalTo(10)
+            make.left.top.equalTo(HOMECELLMARGIN)
             make.size.equalTo(CGSize(width: 35, height: 35))
         }
         nameLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(headImageView.snp.right).offset(10)
+            make.left.equalTo(headImageView.snp.right).offset(HOMECELLMARGIN)
             make.top.equalTo(headImageView)
         }
         membershipImageView.snp.makeConstraints { (make) in
             make.centerY.equalTo(nameLabel)
-            make.left.equalTo(nameLabel.snp.right).offset(10)
+            make.left.equalTo(nameLabel.snp.right).offset(HOMECELLMARGIN)
         }
         timeLabel.snp.makeConstraints { (make) in
             make.left.equalTo(nameLabel)
             make.bottom.equalTo(headImageView)
         }
         sourceLable.snp.makeConstraints { (make) in
-            make.left.equalTo(timeLabel.snp.right).offset(10)
+            make.left.equalTo(timeLabel.snp.right).offset(HOMECELLMARGIN)
             make.top.equalTo(timeLabel)
         }
         avatarImageView.snp.makeConstraints { (make) in
@@ -87,11 +87,11 @@ class PJStatusOriginalView: UIView {
         }
         contentLabel.snp.makeConstraints { (make) in
             make.left.equalTo(headImageView)
-            make.top.equalTo(headImageView.snp.bottom).offset(10)
-            make.width.equalTo(ScreenWidth - 20)
+            make.top.equalTo(headImageView.snp.bottom).offset(HOMECELLMARGIN)
+            make.width.equalTo(ScreenWidth - 2 * HOMECELLMARGIN)
         }
         self.snp.makeConstraints { (make) in
-            make.bottom.equalTo(contentLabel).offset(10)
+            make.bottom.equalTo(contentLabel).offset(HOMECELLMARGIN)
         }
     }
     
