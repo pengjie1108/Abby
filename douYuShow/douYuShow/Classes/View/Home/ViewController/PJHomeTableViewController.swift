@@ -15,12 +15,18 @@ class PJHomeTableViewController: PJBaseTableViewController {
     
 //    var dataArray:[PJHomeModel] = [PJHomeModel]()
     var homeViewModel: PJHomeViewModel = PJHomeViewModel()
+    
+    fileprivate lazy var footerView: UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
+        //设置颜色
+        view.color = ThemeColor
+        return view
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setNavBar()
-        
         if !userLogin {
             visitorView.updateUI(title: "关注一些人,回到这里看看有什么惊喜哟", imageName: "visitordiscover_feed_image_smallicon",isHome: true)
             return
@@ -41,6 +47,8 @@ extension PJHomeTableViewController{
         tableView.estimatedRowHeight = 200
         //隐藏 cell 分割线
         tableView.separatorStyle = .none
+        //设置 footerview
+        tableView.tableFooterView = footerView
     }
 }
 
@@ -71,6 +79,13 @@ extension PJHomeTableViewController{
         //cell 的 VM 和首页的 VM 传递
         cell.statusViewModel = homeViewModel.dataArray[indexPath.row]
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == homeViewModel.dataArray.count - 1 && !footerView.isAnimating{
+            footerView.startAnimating()
+            loadData()
+        }
     }
 }
 
