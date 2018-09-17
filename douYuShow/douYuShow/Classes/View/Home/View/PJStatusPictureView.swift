@@ -60,7 +60,7 @@ class PJStatusPictureView: UICollectionView {
     }
     
     private func setupUI(){
-        backgroundColor = randomColor()
+        backgroundColor = UIColor.clear
         //设置代理
         dataSource = self
         //注册 cell
@@ -126,7 +126,7 @@ class PJStatusPictureViewCell: UICollectionViewCell {
     
     /// 配图 cell 的 UI 设置
     private func setupUI(){
-        backgroundColor = randomColor()
+        backgroundColor = UIColor.white
         //1添加控件
         contentView.addSubview(bgImageView)
         contentView.addSubview(gifImageView)

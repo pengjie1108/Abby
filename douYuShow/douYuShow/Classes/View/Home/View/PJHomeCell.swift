@@ -63,14 +63,16 @@ class PJHomeCell: UITableViewCell {
     private lazy var bottomView: PJStatusBottomView = PJStatusBottomView()
 
     private func setupUI(){
-        backgroundColor = randomColor()
+//        backgroundColor = randomColor()
+        backgroundColor = UIColor(white: 235/255, alpha: 1)
         //添加控件
         contentView.addSubview(originalView)
         contentView.addSubview(bottomView)
         contentView.addSubview(retweetView)
         //添加约束
         originalView.snp.makeConstraints { (make) in
-            make.left.top.right.equalTo(contentView)
+            make.top.equalTo(contentView).offset(8)
+            make.left.right.equalTo(contentView)
         }
         retweetView.snp.makeConstraints { (make) in
             make.left.right.equalTo(contentView)

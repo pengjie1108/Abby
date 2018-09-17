@@ -20,7 +20,7 @@ class PJStatusBottomView: UIView {
     }
     
     private func setupUI(){
-        backgroundColor = UIColor.white
+        backgroundColor = UIColor(white: 235/255, alpha: 1)
         //01添加控件
         let retweetButton = addChildButtons(imgName: "timeline_icon_retweet", title: "转发")
         let commentButton = addChildButtons(imgName: "timeline_icon_comment", title: "评论")

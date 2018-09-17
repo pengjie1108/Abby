@@ -57,7 +57,7 @@ class PJStatusRetweetView: UIView {
     
     // MARK: 转发微博的 UI 设置
     private func setupUI(){
-        backgroundColor = randomColor()
+        backgroundColor = UIColor(white: 235/255, alpha: 1)
         //1添加控件
         addSubview(contentLabel)
         addSubview(pictureView)

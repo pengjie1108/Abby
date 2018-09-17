@@ -39,6 +39,8 @@ extension PJHomeTableViewController{
 //        tableView.rowHeight = 200
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 200
+        //隐藏 cell 分割线
+        tableView.separatorStyle = .none
     }
 }
 

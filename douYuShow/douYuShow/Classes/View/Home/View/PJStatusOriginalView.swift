@@ -78,7 +78,7 @@ class PJStatusOriginalView: UIView {
     
     //MARK:UI 设置
     private func setupUI(){
-        backgroundColor = randomColor()
+        backgroundColor = UIColor.white
         
         //1添加控件
         addSubview(headImageView)
