@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SDWebImage
 /*
    -帮助微博首页请求数据
    -为微博首页保存数据和提供数据
@@ -45,9 +45,46 @@ extension PJHomeViewModel{
                 statuViewModel.homeModel = homeModel
                 tempArray.append(statuViewModel)
             }
+            self.downLoadSingeImage(tempArray: tempArray, finish: finish)
             //赋值
             self.dataArray = tempArray
             //刷新
+            finish(true)
+        }
+    }
+    
+    private func downLoadSingeImage(tempArray:[PJStatusViewModel],finish:@escaping (Bool)->()){
+        //创建调度组
+        let group = DispatchGroup()
+        //遍历 temparray 判断是否是一张图片
+        for statusViewModel in tempArray{
+            //判断原创微博是否是一张图片
+            if statusViewModel.homeModel?.pic_urls?.count == 1{
+                //使用调度组进行加标识
+                group.enter()
+                //使用 SD 完成图片下载
+                SDWebImageDownloader.shared().downloadImage(with: URL(string: statusViewModel.homeModel?.pic_urls?.first?.thumbnail_pic ?? ""), options: [], progress: nil) { (image, data, error, _) in
+                    print("原创微博单张图片下载完成")
+                    //取消调度组标识
+                    group.leave()
+                }
+            }
+            
+            //判断转发微博是否是一张图片
+            if statusViewModel.homeModel?.retweeted_status?.pic_urls?.count == 1{
+                //使用调度组进行加标识
+                group.enter()
+                //使用 SD 完成图片下载
+                SDWebImageDownloader.shared().downloadImage(with: URL(string: statusViewModel.homeModel?.pic_urls?.first?.thumbnail_pic ?? ""), options: [], progress: nil) { (image, data, error, _) in
+                    print("转发微博单张图片下载完成")
+                    //取消调度组标识
+                    group.leave()
+                }
+            }
+        }
+        //通过调度组通知 来监听单张图片是否下载完成
+        group.notify(queue: DispatchQueue.main) {
+            print("-单张图片全部下载完成-")
             finish(true)
         }
     }

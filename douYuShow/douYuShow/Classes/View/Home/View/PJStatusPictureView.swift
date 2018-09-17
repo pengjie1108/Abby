@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 /// cell 可重用标识符
 private let CELLID = "reuseIdentifier"
@@ -26,6 +27,13 @@ class PJStatusPictureView: UICollectionView {
             self.snp.updateConstraints { (make) in
                 make.size.equalTo(size)
             }
+            //设置 layout
+            let layout = collectionViewLayout as! UICollectionViewFlowLayout
+            if picUrls!.count == 1{
+                layout.itemSize = size
+            }else {
+                layout.itemSize = CGSize(width: cellWH, height: cellWH)
+            }
             //需要进行 layoutIfNeed 同步 itemsize 和配图大小.
             layoutIfNeeded()
             //刷新 UI
@@ -34,6 +42,34 @@ class PJStatusPictureView: UICollectionView {
     }
     
     private func dealPictureViewSize(count: Int) -> CGSize{
+        //如果是一张图片
+        if count == 1 {
+            //判断图片地址是否为 nil
+            if let thumbnail_pic = picUrls?.first?.thumbnail_pic{
+                //通过图片地址得到本地对应的图片
+                let image = SDWebImageManager.shared().imageCache?.imageFromDiskCache(forKey: thumbnail_pic)
+                //如果为 image
+                if let img = image{
+                   //取得图片真实大小
+                    var imgW = img.size.width
+                    var imgH = img.size.height
+                    //如果宽度小于80
+                    if imgW < 80{
+                        imgW = 80
+                    }
+                    //如果高度大于150
+                    if imgH > 150{
+                        imgH = 150
+                    }
+                     return CGSize(width: imgW, height: imgH)
+                }
+            }
+            
+            
+            
+            
+        }
+        
         //计算行数列数
         let row = count == 4 ? 2 : (count - 1) / 3 + 1    //行
         let col = count == 4 ? 2 : count >= 3 ? 3 : count //列
