@@ -16,10 +16,21 @@ class PJHomeTableViewController: PJBaseTableViewController {
 //    var dataArray:[PJHomeModel] = [PJHomeModel]()
     var homeViewModel: PJHomeViewModel = PJHomeViewModel()
     
+    //MARK:懒加载控件
+    //风火轮
     fileprivate lazy var footerView: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
         //设置颜色
         view.color = ThemeColor
+        return view
+    }()
+    
+    //系统下拉刷新控件
+    fileprivate lazy var pjRefreshControl: UIRefreshControl = {
+        let view = UIRefreshControl()
+        view.attributedTitle = NSAttributedString(string: "同辉")
+        //添加监听事件
+        view.addTarget(self, action: #selector(refreshActioin), for: UIControlEvents.valueChanged)
         return view
     }()
 
@@ -32,6 +43,14 @@ class PJHomeTableViewController: PJBaseTableViewController {
             return
         }
         setupTableViewInfo()
+        loadData()
+    }
+    
+}
+
+extension PJHomeTableViewController{
+    //下拉刷新监听方法
+    @objc fileprivate func refreshActioin(){
         loadData()
     }
 }
@@ -49,13 +68,16 @@ extension PJHomeTableViewController{
         tableView.separatorStyle = .none
         //设置 footerview
         tableView.tableFooterView = footerView
+        //添加 refreshcontrol
+        tableView.addSubview(pjRefreshControl)
     }
 }
 
 //MARK: 请求微博首页数据
 extension PJHomeTableViewController{
     fileprivate func loadData(){
-        homeViewModel.getHomeData { (isSuccess) in
+        homeViewModel.getHomeData(isPullUp: footerView.isAnimating) { (isSuccess) in
+            self.endRefreshing()
             //请求失败
             if !isSuccess{
                 print("请求失败")
@@ -64,6 +86,12 @@ extension PJHomeTableViewController{
             //请求成功
             self.tableView.reloadData()
         }
+    }
+    //统一定义动画
+    fileprivate func endRefreshing(){
+        //停止动画
+        self.footerView.stopAnimating()
+        self.pjRefreshControl.endRefreshing()
     }
 }
 
@@ -83,7 +111,9 @@ extension PJHomeTableViewController{
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == homeViewModel.dataArray.count - 1 && !footerView.isAnimating{
+            //开启动画
             footerView.startAnimating()
+            //请求数据
             loadData()
         }
     }

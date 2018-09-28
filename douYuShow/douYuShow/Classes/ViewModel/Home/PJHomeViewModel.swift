@@ -20,8 +20,23 @@ class PJHomeViewModel: NSObject {
 
 //请求数据
 extension PJHomeViewModel{
-    func getHomeData(finish:@escaping (Bool) -> ()){
-        PJNetworkTools.shared.homeLoadData { (response, error) in
+    func getHomeData(isPullUp:Bool ,finish:@escaping (Bool) -> ()){
+        
+        var sinceId: Int64 = 0
+        var maxId: Int64 = 0
+        //如果 isPullUp == true 代表上拉加载更多
+        if isPullUp{
+            //代表上拉加载更多
+            maxId = dataArray.last?.homeModel?.id ?? 0
+            if maxId > 0{
+                maxId -= 1
+            }
+        }else{
+            //表示下拉刷新
+            sinceId = dataArray.first?.homeModel?.id ?? 0
+        }
+        
+        PJNetworkTools.shared.homeLoadData(since_id: sinceId, max_id: maxId) { (response, error) in
             if error != nil{
                 print("请求失败")
                 finish(false)
@@ -37,9 +52,10 @@ extension PJHomeViewModel{
                 return
             }
             //字典转模型
+             var tempArray:[PJStatusViewModel] = [PJStatusViewModel]()
             let statusArray = NSArray.yy_modelArray(with: PJHomeModel.self, json: resArr) as! [PJHomeModel]
             //将模型数组每个元素放入 statusVM 属性中
-            var tempArray:[PJStatusViewModel] = [PJStatusViewModel]()
+           
             for homeModel in statusArray{
                 let statuViewModel = PJStatusViewModel()
                 statuViewModel.homeModel = homeModel
@@ -47,6 +63,13 @@ extension PJHomeViewModel{
             }
             self.downLoadSingeImage(tempArray: tempArray, finish: finish)
             //赋值
+            //判断是否上拉加载过
+            if isPullUp{
+                self.dataArray = self.dataArray + tempArray
+            }else{
+                self.dataArray = tempArray + self.dataArray
+            }
+            
             self.dataArray = tempArray
             //刷新
             finish(true)
@@ -64,7 +87,7 @@ extension PJHomeViewModel{
                 group.enter()
                 //使用 SD 完成图片下载
                 SDWebImageDownloader.shared().downloadImage(with: URL(string: statusViewModel.homeModel?.pic_urls?.first?.thumbnail_pic ?? ""), options: [], progress: nil) { (image, data, error, _) in
-                    print("原创微博单张图片下载完成")
+//                    print("原创微博单张图片下载完成")
                     //取消调度组标识
                     group.leave()
                 }
@@ -76,7 +99,7 @@ extension PJHomeViewModel{
                 group.enter()
                 //使用 SD 完成图片下载
                 SDWebImageDownloader.shared().downloadImage(with: URL(string: statusViewModel.homeModel?.pic_urls?.first?.thumbnail_pic ?? ""), options: [], progress: nil) { (image, data, error, _) in
-                    print("转发微博单张图片下载完成")
+//                    print("转发微博单张图片下载完成")
                     //取消调度组标识
                     group.leave()
                 }
@@ -84,7 +107,7 @@ extension PJHomeViewModel{
         }
         //通过调度组通知 来监听单张图片是否下载完成
         group.notify(queue: DispatchQueue.main) {
-            print("-单张图片全部下载完成-")
+//            print("-单张图片全部下载完成-")
             finish(true)
         }
     }

@@ -48,11 +48,13 @@ class PJNetworkTools: AFHTTPSessionManager {
 }
 
 extension PJNetworkTools{
-    func homeLoadData(finished: @escaping (Any?, Error?) -> ()){
+    func homeLoadData(since_id: Int64, max_id: Int64, finished: @escaping (Any?, Error?) -> ()){
         //URL
         let urlString = "https://api.weibo.com/2/statuses/home_timeline.json"
         //请求参数
-        let params = ["access_token": PJUserAccountViewModel.shared.accessToken]
+        let params = ["access_token": PJUserAccountViewModel.shared.accessToken!,
+                      "since_id":"\(since_id)",
+                      "max_id":"\(max_id)"]
         //发送请求
         request(method: .GET, urlString: urlString, parameters: params, finished: finished)
     }
