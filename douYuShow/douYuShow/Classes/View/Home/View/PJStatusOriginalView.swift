@@ -28,6 +28,8 @@ class PJStatusOriginalView: UIView {
            contentLabel.text = statusViewModel?.homeModel?.text
         
            sourceLable.text = statusViewModel?.sourceText
+            
+           timeLabel.text = statusViewModel?.createAtText
            
            //卸载约束
            originalViewBottomConstraint?.deactivate()

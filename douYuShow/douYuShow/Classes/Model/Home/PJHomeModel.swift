@@ -11,7 +11,7 @@ import UIKit
 class PJHomeModel: NSObject {
     
     /// 创建时间
-    var created_at: String?
+    var created_at: Date?
     /// 微博 ID
     var id: Int64 = 0
     /// 微博内容

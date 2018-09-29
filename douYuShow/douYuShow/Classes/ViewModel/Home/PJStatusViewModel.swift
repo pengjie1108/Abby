@@ -22,7 +22,10 @@ class PJStatusViewModel: NSObject {
     var verifiedImage: UIImage?
     /// 微博来源字符串
     var sourceText: String?
-    
+    /// 微博事件字符串
+    var createAtText: String?{
+        return dealSinaTimeText(createAt: homeModel?.created_at)
+    }
     var homeModel: PJHomeModel?{
         didSet{
             mbrankImage = dealMbrankImage(mbrank: homeModel?.user?.mbrank ?? 0)
@@ -46,6 +49,57 @@ extension PJStatusViewModel{
         let result = s.substring(with: startIndex.upperBound..<endIndex.lowerBound)
         //拼接返回
         return "来自" + result
+    }
+}
+
+//MARK:处理微博时间业务逻辑
+extension PJStatusViewModel{
+    
+    fileprivate func dealSinaTimeText(createAt: Date?) -> String?{
+        guard let sinaDate = createAt else {
+            return nil
+        }
+        //时间格式化
+        let df = DateFormatter()
+        //判断是否今年
+        let isThisYear = dealSinaDateIsThisYear(sinaDate: sinaDate)
+        //如果是今年
+        if isThisYear {
+            let calendar = Calendar.current
+            //如果是今天
+            if calendar.isDateInToday(sinaDate){
+                let s = Int(Date().timeIntervalSince(sinaDate))
+                if s <= 60{
+                    return "刚刚"
+                }else if s > 60 && s <= 60 * 60{
+                    return "\(s/60)分钟前"
+                }else{
+                    return "\(s/3600)分钟前"
+                }
+            }else if calendar.isDateInYesterday(sinaDate){
+                df.dateFormat = "昨天 hh:mm"
+            }else{
+                df.dateFormat = "MM月dd日 hh:mm"
+            }
+        }else{
+            //如果不是今年
+            df.dateFormat = "YYYY年MM月dd日 hh:mm"
+        }
+        let result = df.string(from: sinaDate)
+        return result
+    }
+    
+    fileprivate func dealSinaDateIsThisYear(sinaDate: Date) -> Bool{
+        //时间格式化
+        let df = DateFormatter()
+        //指定日期格式
+        df.dateFormat = "YYYY"
+        //通过微博日期转微博日期字符串
+        let sinaDateStr = df.string(from: sinaDate)
+        //通过当前时间日期转当前日期字符串
+        let currentDateStr = df.string(from: Date())
+        //判断是否相等
+        return sinaDateStr == currentDateStr
     }
 }
 
