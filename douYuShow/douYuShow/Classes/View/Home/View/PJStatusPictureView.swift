@@ -20,7 +20,7 @@ class PJStatusPictureView: UICollectionView {
 
     var picUrls: [PJPictureUrlsModel]?{
         didSet{
-            print("图片数量:",picUrls!.count)
+//            print("图片数量:",picUrls!.count)
             //计算配图需要的尺寸
             let size = dealPictureViewSize(count: picUrls!.count)
             //更新计算后的 size

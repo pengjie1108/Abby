@@ -24,7 +24,7 @@ extension PJHomeViewModel{
         
         var sinceId: Int64 = 0
         var maxId: Int64 = 0
-        //如果 isPullUp == true 代表上拉加载更多
+        //上拉加载更多
         if isPullUp{
             //代表上拉加载更多
             maxId = dataArray.last?.homeModel?.id ?? 0
@@ -52,7 +52,7 @@ extension PJHomeViewModel{
                 return
             }
             //字典转模型
-             var tempArray:[PJStatusViewModel] = [PJStatusViewModel]()
+            var tempArray:[PJStatusViewModel] = [PJStatusViewModel]()
             let statusArray = NSArray.yy_modelArray(with: PJHomeModel.self, json: resArr) as! [PJHomeModel]
             //将模型数组每个元素放入 statusVM 属性中
            

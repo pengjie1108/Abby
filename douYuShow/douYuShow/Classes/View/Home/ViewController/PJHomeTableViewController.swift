@@ -13,7 +13,6 @@ import YYModel
 private let CELLID = "reuseIdentifier"
 class PJHomeTableViewController: PJBaseTableViewController {
     
-//    var dataArray:[PJHomeModel] = [PJHomeModel]()
     var homeViewModel: PJHomeViewModel = PJHomeViewModel()
     
     //MARK:懒加载控件
@@ -24,19 +23,17 @@ class PJHomeTableViewController: PJBaseTableViewController {
         view.color = ThemeColor
         return view
     }()
-    
     //系统下拉刷新控件
-    fileprivate lazy var pjRefreshControl: UIRefreshControl = {
-        let view = UIRefreshControl()
-        view.attributedTitle = NSAttributedString(string: "同辉")
+    fileprivate lazy var pjRefreshControl: PJRefreshControl = {
+        let view = PJRefreshControl()
         //添加监听事件
         view.addTarget(self, action: #selector(refreshActioin), for: UIControlEvents.valueChanged)
         return view
     }()
 
+    //MARK:视图加载
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setNavBar()
         if !userLogin {
             visitorView.updateUI(title: "关注一些人,回到这里看看有什么惊喜哟", imageName: "visitordiscover_feed_image_smallicon",isHome: true)
@@ -45,7 +42,6 @@ class PJHomeTableViewController: PJBaseTableViewController {
         setupTableViewInfo()
         loadData()
     }
-    
 }
 
 extension PJHomeTableViewController{
