@@ -9,6 +9,23 @@
 import UIKit
 
 
+extension UIImage{
+    //获取主屏幕的内容图片
+    class func getScreenSnap() -> UIImage?{
+        //获取主 window
+        let window = UIApplication.shared.keyWindow!
+        //开启上下文
+        UIGraphicsBeginImageContext(window.bounds.size)
+        //将主 window 渲染到上下文中
+        window.drawHierarchy(in: window.bounds, afterScreenUpdates: false)
+        //通过上下文获取对应的 image
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        //关闭上下文
+        UIGraphicsEndImageContext()
+        return image
+    }
+}
+
 extension UIImageView{
     //快速创建 ImageView
     convenience init(imgName: String){

@@ -22,6 +22,8 @@ class PJMainTabBarController: UITabBarController {
         //监听按钮点击事件
         pjTabBar.clickClosure = {[weak self] (tabbar:PJTabBar) -> () in
             print("点击加号按钮")
+            let composeView = PJComposeView()
+            self?.view.addSubview(composeView)
         }
     }
 
