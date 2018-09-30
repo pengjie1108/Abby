@@ -29,7 +29,6 @@ class PJComposeButton: UIButton {
     }
     
     private func setupUI(){
-        backgroundColor = randomColor()
         //设置 imageView 的填充方式
         imageView?.contentMode = .center
         //设置 titleLabel 的属性

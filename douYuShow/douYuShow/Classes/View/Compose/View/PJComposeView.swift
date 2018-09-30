@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import pop
 
 class PJComposeView: UIView {
-
+    
+    var composeButtons:[PJComposeButton] = [PJComposeButton]()
+    
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
         setupUI()
@@ -17,6 +20,16 @@ class PJComposeView: UIView {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    //MARK:供外界调用的方法
+    class func show(target: UIViewController){
+        //实例化 composeView
+        let composeView = PJComposeView()
+        //实例化一个 composeView
+        target.view.addSubview(composeView)
+        //设置6个按钮的动画
+        composeView.setupComposeButtonAnim(isUp: true)
     }
     
     //MARK:懒加载控件
@@ -47,7 +60,33 @@ class PJComposeView: UIView {
 
 extension PJComposeView{
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        removeFromSuperview()
+        //设置动画
+        setupComposeButtonAnim(isUp: false)
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()) {
+          self.removeFromSuperview()
+        }
+    }
+}
+
+extension PJComposeView{
+    fileprivate func setupComposeButtonAnim(isUp: Bool){
+        //临界值
+        let buttonYMargin: CGFloat = isUp == true ? -350 : 350
+        //最终遍历的数组
+        let tempArray = isUp == true ? composeButtons : composeButtons.reversed()
+        //遍历数组
+        for (i,button) in tempArray.enumerated(){
+            //实例化弹簧动画对象
+            let anSpring = POPSpringAnimation(propertyNamed: kPOPViewCenter)!
+            //设置 toValue
+            anSpring.toValue = CGPoint(x: button.center.x, y: button.center.y + buttonYMargin)
+            //开始时间 系统绝对时间
+            anSpring.beginTime = CACurrentMediaTime() + Double(i) * 0.025
+            //振幅
+            anSpring.springBounciness = 10.0
+            //设置动画
+            button.pop_add(anSpring,forKey:nil)
+        }
     }
 }
 
@@ -71,7 +110,7 @@ extension PJComposeView{
             button.setImage(UIImage(named: model.icon ?? ""), for: .normal)
             //设置 title
             button.setTitle(model.title, for: .normal)
-            button.frame = CGRect(x: buttonItem + (buttonW + buttonItem) * col, y: (buttonH + buttonItem) * row, width: buttonW, height: buttonH)
+            button.frame = CGRect(x: buttonItem + (buttonW + buttonItem) * col, y: 100 + (buttonH + buttonItem) * row, width: buttonW, height: buttonH)
             //添加按钮
             addSubview(button)
         }
