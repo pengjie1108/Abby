@@ -20,7 +20,7 @@ class PJHomeViewModel: NSObject {
 
 //请求数据
 extension PJHomeViewModel{
-    func getHomeData(isPullUp:Bool ,finish:@escaping (Bool) -> ()){
+    func getHomeData(isPullUp:Bool ,finish:@escaping (Bool,Int) -> ()){
         
         var sinceId: Int64 = 0
         var maxId: Int64 = 0
@@ -39,16 +39,18 @@ extension PJHomeViewModel{
         PJNetworkTools.shared.homeLoadData(since_id: sinceId, max_id: maxId) { (response, error) in
             if error != nil{
                 print("请求失败")
-                finish(false)
+                finish(false,0)
                 return
             }
             //解析 response
             //在 if let 或者 guard let 中 转类型的时候 一般情况 都需要使用的是 as
             guard let res = response as? [String: Any] else {
+                finish(false,0)
                 return
             }
             //判断是否是 nil 而且是字典,获取字典中key 中数组数组
             guard let resArr = res["statuses"] as? [[String: Any]] else{
+                finish(false,0)
                 return
             }
             //字典转模型
@@ -72,11 +74,10 @@ extension PJHomeViewModel{
             
             self.dataArray = tempArray
             //刷新
-            finish(true)
         }
     }
     
-    private func downLoadSingeImage(tempArray:[PJStatusViewModel],finish:@escaping (Bool)->()){
+    private func downLoadSingeImage(tempArray:[PJStatusViewModel],finish:@escaping (Bool,Int)->()){
         //创建调度组
         let group = DispatchGroup()
         //遍历 temparray 判断是否是一张图片
@@ -108,7 +109,7 @@ extension PJHomeViewModel{
         //通过调度组通知 来监听单张图片是否下载完成
         group.notify(queue: DispatchQueue.main) {
 //            print("-单张图片全部下载完成-")
-            finish(true)
+            finish(true,tempArray.count)
         }
     }
 }

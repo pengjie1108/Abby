@@ -30,6 +30,18 @@ class PJHomeTableViewController: PJBaseTableViewController {
         view.addTarget(self, action: #selector(refreshActioin), for: UIControlEvents.valueChanged)
         return view
     }()
+    //下拉刷新提示控件
+    fileprivate lazy var pullDownTipLabel: UILabel = {
+        let lab = UILabel()
+        lab.frame = CGRect(x: 0, y: 64 - 30, width: ScreenWidth, height: 30)
+        lab.backgroundColor = ThemeColor
+        lab.textColor = UIColor.white
+        lab.font = UIFont.systemFont(ofSize: FONTSIZEOFNORMAL)
+        lab.textAlignment = .center
+        //隐藏状态
+        lab.isHidden = true
+        return lab
+    }()
 
     //MARK:视图加载
     override func viewDidLoad() {
@@ -39,8 +51,14 @@ class PJHomeTableViewController: PJBaseTableViewController {
             visitorView.updateUI(title: "关注一些人,回到这里看看有什么惊喜哟", imageName: "visitordiscover_feed_image_smallicon",isHome: true)
             return
         }
+        setupUI()
         setupTableViewInfo()
         loadData()
+    }
+    
+    //MARK:设置控件
+    private func setupUI(){
+        navigationController?.view.insertSubview(pullDownTipLabel, belowSubview: navigationController!.navigationBar)
     }
 }
 
@@ -72,17 +90,52 @@ extension PJHomeTableViewController{
 //MARK: 请求微博首页数据
 extension PJHomeTableViewController{
     fileprivate func loadData(){
-        homeViewModel.getHomeData(isPullUp: footerView.isAnimating) { (isSuccess) in
+        homeViewModel.getHomeData(isPullUp: footerView.isAnimating) { (isSuccess,count) in
             self.endRefreshing()
             //请求失败
-            if !isSuccess{
+            if !isSuccess {
                 print("请求失败")
                 return
+            }else {
+                self.tableView.reloadData()
+                if !self.footerView.isAnimating{
+                    
+                }
             }
             //请求成功
             self.tableView.reloadData()
         }
     }
+    
+    //设置下拉刷新提示控件动画,+设置显示文字+ 只有 footerView 没有动画的时候 才可以首次请求数据和下拉刷新
+    fileprivate func showPullDownTipLabel(count: Int){
+        //防止用户快速刷新 导致 pullDownTipLabel 重复下移的 bug
+        if self.pullDownTipLabel.isHidden == false{
+            return
+        }
+        self.pullDownTipLabel.isHidden = false
+        //定义一个字符串
+        var text = ""
+        //设置 pullDownTipLabel 显示的文字
+        if count <= 0{
+            text = "您已经是最新的微薄"
+        }else{
+            text = "您更新了\(count)条微薄"
+        }
+        self.pullDownTipLabel.text = text
+        
+        UIView.animate(withDuration: 1, animations: {
+            self.pullDownTipLabel.transform = CGAffineTransform(translationX: 0, y: 30)
+        }) { (_) in
+            //
+            UIView.animateKeyframes(withDuration: 1, delay: 1, options: [], animations: {
+                self.pullDownTipLabel.transform = CGAffineTransform.identity
+            }, completion: { (_) in
+                self.pullDownTipLabel.isHidden = true
+            })
+        }
+    }
+    
     //统一定义动画
     fileprivate func endRefreshing(){
         //停止动画
