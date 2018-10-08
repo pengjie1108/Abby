@@ -38,11 +38,12 @@ class PJComposeView: UIView {
         let img = UIImageView(image: UIImage.getScreenSnap()?.applyLightEffect())
         return img
     }()
-    //背景图片
+    
+    //广告图片
     private lazy var sloganImageView: UIImageView = UIImageView(imgName: "compose_slogan")
     
     private func setupUI(){
-        backgroundColor = randomColor()
+//        backgroundColor = randomColor()
         //添加控件
         addSubview(bgImageView)
         addSubview(sloganImageView)
@@ -68,6 +69,7 @@ extension PJComposeView{
     }
 }
 
+//MARK:设置六个按钮动画
 extension PJComposeView{
     fileprivate func setupComposeButtonAnim(isUp: Bool){
         //临界值
@@ -90,6 +92,7 @@ extension PJComposeView{
     }
 }
 
+//MARK:六个按钮布局
 extension PJComposeView{
     fileprivate func addChildComposeButtons(){
         //得到数据
@@ -110,7 +113,9 @@ extension PJComposeView{
             button.setImage(UIImage(named: model.icon ?? ""), for: .normal)
             //设置 title
             button.setTitle(model.title, for: .normal)
-            button.frame = CGRect(x: buttonItem + (buttonW + buttonItem) * col, y: 100 + (buttonH + buttonItem) * row, width: buttonW, height: buttonH)
+            button.frame = CGRect(x: buttonItem + (buttonW + buttonItem) * col, y: ScreenHeight + (buttonH + buttonItem) * row, width: buttonW, height: buttonH)
+            //添加按钮到数组中
+            composeButtons.append(button)
             //添加按钮
             addSubview(button)
         }
