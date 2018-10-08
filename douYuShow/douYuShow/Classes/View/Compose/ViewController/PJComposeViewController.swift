@@ -19,6 +19,11 @@ class PJComposeViewController: UIViewController {
         //背景颜色
         view.backgroundColor = UIColor.white
         setupNav()
+        view.addSubview(composeTextView)
+        
+        composeTextView.snp.makeConstraints { (make) in
+            make.edges.equalTo(self.view)
+        }
     }
     
     private func setupNav(){
@@ -68,6 +73,28 @@ class PJComposeViewController: UIViewController {
         return button
     }()
 
+    fileprivate lazy var composeTextView: PJComposeTextView = {
+        let view = PJComposeTextView()
+        //设置代理
+        view.delegate = self
+        //允许上下滚动
+        view.alwaysBounceVertical = true
+        view.font = UIFont.systemFont(ofSize: 16)
+        view.placeholder = "今天天气怎么样"
+        return view
+    }()
+}
+
+//MARK:UITextViewDelegate
+extension PJComposeViewController: UITextViewDelegate{
+    func textViewDidChange(_ textView: UITextView) {
+        //是否有文字
+        navigationItem.rightBarButtonItem?.isEnabled = composeTextView.hasText
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.composeTextView.resignFirstResponder()
+    }
 }
 
 extension PJComposeViewController{
