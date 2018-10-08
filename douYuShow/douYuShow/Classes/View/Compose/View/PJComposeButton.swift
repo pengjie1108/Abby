@@ -18,6 +18,9 @@ class PJComposeButton: UIButton {
             return false
         }
     }
+    
+    //设置模型属性,供赋值
+    var composeModel: PJComposeModel?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
